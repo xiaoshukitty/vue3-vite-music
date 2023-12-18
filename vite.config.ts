@@ -33,7 +33,14 @@ export default defineConfig({
       },
     },
   },
+  // 构建输出配置
   build: {
-    outDir: "docs", // 打包文件的输出目录
+    outDir: "./dist",
+    target: "modules",
+    assetsDir: "assets",
+    assetsInlineLimit: 360000,
   },
+  // 静态资源基础路径 base: './' || '',
+  // base: '/h5', // 子目录
+  base: process.env.NODE_ENV === "production" ? "./" : "/",
 });
