@@ -33,4 +33,7 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    outDir: "docs", // 打包文件的输出目录
+  },
 });
