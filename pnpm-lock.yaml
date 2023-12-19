@@ -11,6 +11,9 @@ dependencies:
   element-plus:
     specifier: ^2.4.4
     version: registry.npmmirror.com/element-plus@2.4.4(vue@3.3.12)
+  pinia:
+    specifier: ^2.1.7
+    version: registry.npmmirror.com/pinia@2.1.7(typescript@5.3.3)(vue@3.3.12)
   sass:
     specifier: ^1.69.5
     version: registry.npmmirror.com/sass@1.69.5
@@ -20,6 +23,9 @@ dependencies:
   vue:
     specifier: ^3.3.11
     version: registry.npmmirror.com/vue@3.3.12(typescript@5.3.3)
+  vue-router:
+    specifier: ^4.2.5
+    version: registry.npmmirror.com/vue-router@4.2.5(vue@3.3.12)
 
 devDependencies:
   '@vitejs/plugin-vue':
@@ -732,6 +738,12 @@ packages:
     dependencies:
       '@vue/compiler-dom': registry.npmmirror.com/@vue/compiler-dom@3.3.12
       '@vue/shared': registry.npmmirror.com/@vue/shared@3.3.12
+
+  registry.npmmirror.com/@vue/devtools-api@6.5.1:
+    resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==, tarball: https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.5.1.tgz}
+    name: '@vue/devtools-api'
+    version: 6.5.1
+    dev: false
 
   registry.npmmirror.com/@vue/language-core@1.8.25(typescript@5.3.3):
     resolution: {integrity: sha512-NJk/5DnAZlpvXX8BdWmHI45bWGLViUaS3R/RMrmFSvFMSbJKuEODpM4kR0F0Ofv5SFzCWuNiMhxameWpVdQsnA==, tarball: https://registry.npmmirror.com/@vue/language-core/-/language-core-1.8.25.tgz}
@@ -1684,6 +1696,27 @@ packages:
     version: 2.3.1
     engines: {node: '>=8.6'}
 
+  registry.npmmirror.com/pinia@2.1.7(typescript@5.3.3)(vue@3.3.12):
+    resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==, tarball: https://registry.npmmirror.com/pinia/-/pinia-2.1.7.tgz}
+    id: registry.npmmirror.com/pinia/2.1.7
+    name: pinia
+    version: 2.1.7
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.1
+      typescript: registry.npmmirror.com/typescript@5.3.3
+      vue: registry.npmmirror.com/vue@3.3.12(typescript@5.3.3)
+      vue-demi: registry.npmmirror.com/vue-demi@0.14.6(vue@3.3.12)
+    dev: false
+
   registry.npmmirror.com/pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==, tarball: https://registry.npmmirror.com/pkg-types/-/pkg-types-1.0.3.tgz}
     name: pkg-types
@@ -2152,6 +2185,18 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: registry.npmmirror.com/vue@3.3.12(typescript@5.3.3)
+    dev: false
+
+  registry.npmmirror.com/vue-router@4.2.5(vue@3.3.12):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.5.tgz}
+    id: registry.npmmirror.com/vue-router/4.2.5
+    name: vue-router
+    version: 4.2.5
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.1
       vue: registry.npmmirror.com/vue@3.3.12(typescript@5.3.3)
     dev: false
 
