@@ -8,17 +8,13 @@
   
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router';
-import { getCurrentInstance } from 'vue'
 //获取父组件传递过来的全部路由数组
 defineProps(['menuList']);
 
-let { proxy } = getCurrentInstance();
 
 //获取路由对象
 let $router = useRouter();
 let $route = useRoute();
-
-console.log('proxy--', proxy.menuList);
 
 
 console.log('$router---', $route);
@@ -26,8 +22,8 @@ console.log('$router---', $route);
 // console.log('menuList---', menuList);
 //点击菜单回调
 const goRoute = (val: any) => {
-    console.log('val--',val);
-    
+    console.log('val--', val);
+
     // 路由跳转
     $router.push(val.path)
 
@@ -72,6 +68,6 @@ export default {
     cursor: pointer;
     --tw-bg-opacity: 1;
     background-color: rgb(229 231 235 / var(--tw-bg-opacity)) !important;
-   
+
 }
 </style>

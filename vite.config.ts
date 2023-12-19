@@ -39,6 +39,13 @@ export default defineConfig({
     target: "modules",
     assetsDir: "assets",
     assetsInlineLimit: 360000,
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   },
   // 静态资源基础路径 base: './' || '',
   // base: '/h5', // 子目录
