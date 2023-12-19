@@ -1,55 +1,35 @@
 <template>
-    <template v-for="(item,) in menuList" :key="item.path">
-        <!-- 没有子路由 -->
-        <template v-if="!item.children">
-            <el-menu-item :index="item.path" v-if="!item.meta.hidden" @click="goRoute">
-                <el-icon>
-                    <!-- component vue提供的全局组件，可以直接使用，这里是用来放 icon -->
-                    <component :is="item.meta.icon"></component>
-                </el-icon>
-                <template #title>
-                    <span>{{ item.meta.title }}</span>
-                </template>
-            </el-menu-item>
-        </template>
-        <!-- 有子路由但是只有一个 -->
-        <template v-if="item.children && item.children.length == 1">
-            <el-menu-item :index="item.children[0].path" v-if="!item.children[0].meta.hidden" @click="goRoute">
-                <el-icon>
-                    <component :is="item.children[0].meta.icon"></component>
-                </el-icon>
-                <template #title>
-                    <span>{{ item.children[0].meta.title }}</span>
-                </template>
-            </el-menu-item>
-        </template>
-        <!-- 有子路由，且大于一个 -->
-        <el-sub-menu :index="item.path" v-if="item.children && item.children.length > 1">
-            <template #title>
-                <el-icon>
-                    <component :is="item.meta.icon"></component>
-                </el-icon>
-                <span>{{ item.meta.title }}</span>
-            </template>
-            <!-- 递归组件--有 children 就直接递归这个 Menu 组件让他子组件从新走一遍，递归组件必须要加 name，就是下面那个 script -->
-            <Menu :menuList="item.children"></Menu>
-        </el-sub-menu>
+    <template v-for="(item) in menuList" :key="item.path">
+        <div v-if="!item.meta.hidden" @click="goRoute(item)" class="menu_list">
+            <div :class="item.redirect == $route.path ? 'menu_item menu_select' : 'menu_item'">{{ item.meta.title }}</div>
+        </div>
     </template>
 </template>
   
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { getCurrentInstance } from 'vue'
 //获取父组件传递过来的全部路由数组
 defineProps(['menuList']);
 
+let { proxy } = getCurrentInstance();
+
 //获取路由对象
 let $router = useRouter();
+let $route = useRoute();
 
+console.log('proxy--', proxy.menuList);
+
+
+console.log('$router---', $route);
+
+// console.log('menuList---', menuList);
 //点击菜单回调
 const goRoute = (val: any) => {
-    console.log($router);
+    console.log('val--',val);
+    
     // 路由跳转
-    $router.push(val.index)
+    $router.push(val.path)
 
 }
 
@@ -61,4 +41,37 @@ export default {
 }
 </script>
   
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.menu_list {
+    height: 40px;
+    margin-bottom: 5px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: rgb(248 250 252 / var(--tw-text-opacity));
+}
+
+.menu_item {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    --tw-text-opacity: 1;
+    color: rgb(51 65 85 / var(--tw-text-opacity));
+}
+
+.menu_select {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #2dd4bf;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(45 212 191 / 0));
+    --tw-gradient-to: #34d399;
+    --tw-text-opacity: 1;
+    color: #fff;
+}
+
+.menu_item:hover {
+    cursor: pointer;
+    --tw-bg-opacity: 1;
+    background-color: rgb(229 231 235 / var(--tw-bg-opacity)) !important;
+   
+}
+</style>

@@ -2,15 +2,11 @@
     <div class="layout_container">
         <!-- 左侧菜单 -->
         <div class="layout_slider" :class="{ fold: LayOutSettingStore.fold ? true : false }">
-            <Logo></Logo>
             <!-- 展示菜单 -->
             <!-- 滚动组件 -->
             <el-scrollbar class="scrollbar">
                 <!-- 菜单组件 -->
-                <el-menu :collapse="LayOutSettingStore.fold ? true : false" :default-active="$router.path"
-                    background-color="rgb(84, 92, 100)" text-color="#fff" active-text-color="rgb(255, 208, 75)">
-                    <Menu :menuList="useStore.menuRoutes"></Menu>
-                </el-menu>
+                <Menu :menuList="useStore.menuRoutes"></Menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
@@ -60,6 +56,7 @@ export default {
         width: $base-menu-width;
         height: 100vh;
         background-color: $base-menu-background;
+        padding: 30px 20px;
         color: #fff;
         transition: all .3s;
 
@@ -95,7 +92,6 @@ export default {
         position: absolute;
         width: calc(100% - $base-menu-width);
         height: calc(100vh - $base-tabbar-height);
-        background-color: yellow;
         left: $base-menu-width;
         top: $base-tabbar-height;
         padding: 20px;

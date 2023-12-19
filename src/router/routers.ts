@@ -17,7 +17,7 @@ export const constantRouter = [
     component: () => import("@/layout/index.vue"),
     name: "discover",
     meta: {
-      title: "",
+      title: "推荐",
       hidden: false,
       icon: "",
     },
@@ -40,7 +40,7 @@ export const constantRouter = [
     component: () => import("@/layout/index.vue"),
     name: "radioSation",
     meta: {
-      title: "",
+      title: "电台",
       hidden: false,
       icon: "",
     },
