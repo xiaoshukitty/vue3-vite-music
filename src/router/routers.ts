@@ -57,4 +57,50 @@ export const constantRouter = [
       },
     ],
   },
+  {
+    //登录成功展示数据的路由
+    path: "/music",
+    component: () => import("@/layout/index.vue"),
+    name: "music",
+    meta: {
+      title: "音乐馆",
+      hidden: false,
+      icon: "",
+    },
+    redirect: "/music",
+    children: [
+      {
+        path: "/music",
+        component: () => import("@/view/music/index.vue"),
+        meta: {
+          title: "音乐馆",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+    ],
+  },
+  {
+    //登录成功展示数据的路由
+    path: "/video",
+    component: () => import("@/layout/index.vue"),
+    name: "video",
+    meta: {
+      title: "视频",
+      hidden: false,
+      icon: "",
+    },
+    redirect: "/video",
+    children: [
+      {
+        path: "/video",
+        component: () => import("@/view/video/index.vue"),
+        meta: {
+          title: "视频",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+    ],
+  },
 ];

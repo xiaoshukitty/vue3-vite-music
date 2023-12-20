@@ -1,12 +1,16 @@
 <template>
-    <div>
+    <div class="tabbar_left">
+        <el-input v-model="search_ipt" placeholder="搜索音乐、MV、歌单" clearable :prefix-icon="Search" input-style="#000">
+        </el-input>
+    </div>
+    <div class="tabbar_right">
         <el-switch v-model="dark" class="mt-2" style="margin-left: 24px" inline-prompt :active-icon="Sunny"
             :inactive-icon="Moon" @change="changeDark" />
     </div>
 </template>
 
 <script setup lang='ts'>
-import { Moon, Sunny } from '@element-plus/icons-vue'
+import { Moon, Sunny, Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 //获取 setting 仓库
 import useLayOutSettingStore from '@/store/modules/setting'
@@ -14,6 +18,7 @@ import useLayOutSettingStore from '@/store/modules/setting'
 import { SET_STORAGE, GET_STORAGE } from '@/utils/storage'
 
 let layOutSettingStore = useLayOutSettingStore();
+let search_ipt = ref<string>('')
 //收集开关
 let dark = ref<boolean>(false)
 
@@ -40,4 +45,17 @@ const changeDark = () => {
     }
 }
 </script>
-<style scoped></style>
+<style lang="scss" scoped>
+.el-input {
+    height: 36px;
+}
+
+::v-deep .el-input__wrapper {
+    border-radius: 18px !important;
+    width: 220px !important;
+}
+
+::v-deep .is-focus {
+    box-shadow: 0 0 0 1px #34d399 !important;
+}
+</style>

@@ -81,6 +81,10 @@ export default {
         top: 0;
         left: $base-menu-width;
         transition: all .3s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
 
         &.fold {
             width: calc(100vw - $base-menu-min-width);
