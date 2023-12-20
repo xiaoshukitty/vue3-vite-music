@@ -55,7 +55,7 @@ export default {
     .layout_slider {
         width: $base-menu-width;
         height: 100vh;
-        background-color: $base-menu-background;
+        // background-color: $base-menu-background;
         padding: 30px 20px;
         color: #fff;
         transition: all .3s;
