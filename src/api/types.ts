@@ -27,9 +27,16 @@ export interface RecommendedMusic {
   name: string;
   picUrl: string;
   canDislike: boolean;
-  // song: PNSSong;
+  song: SongType;
   alg: string;
 }
+interface SongType {
+  artists: {
+    id: number;
+    name: string;
+  }[];
+}
+
 //获取推荐mv接口类型
 export interface RecommendedMv {
   id: number;

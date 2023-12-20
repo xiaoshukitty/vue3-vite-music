@@ -26,12 +26,6 @@ axios.interceptors.response.use(
   }
 );
 
-interface ResType<T> {
-  code: number;
-  data?: T;
-  msg: string;
-  err?: string;
-}
 
 interface Http {
   get<T>(url: string, params?: unknown): Promise<T>;

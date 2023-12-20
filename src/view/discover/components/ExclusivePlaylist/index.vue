@@ -15,10 +15,9 @@
 <script setup lang='ts'>
 import Title from '@/components/common/Title/index.vue'
 
-import { onMounted, toRefs, ref } from 'vue'
+import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
 
-const image = ref(null);
 const { exclusivePlaylistData } = toRefs(useMusicStore())
 const { getExclusivePlaylistData } = useMusicStore()
 
