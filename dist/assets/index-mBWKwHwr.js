@@ -1,0 +1,1 @@
+import{_ as a,o as s,c,a8 as d,a9 as o,A as t}from"./index-cMV6r2TR.js";const n={},r={class:"radioSation"},e=[(a=>(d("data-v-c5340fcd"),a=a(),o(),a))((()=>t("h1",null,"电台",-1)))];const i=a(n,[["render",function(a,d){return s(),c("div",r,e)}],["__scopeId","data-v-c5340fcd"]]);export{i as default};
