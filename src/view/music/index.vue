@@ -2,7 +2,7 @@
     <div class="music">
         <h1>音乐馆</h1>
         <el-affix :offset="56">
-            <div :class="{ isBg: 'tabs_bg' }">
+            <div style="padding-left: 20px;" :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
                 <el-tabs v-model="currentMenu">
                     <el-tab-pane v-for=" menu  in  menus " :key="menu.name" :label="menu.label" :name="menu.name"
                         class="text-main" />
@@ -10,7 +10,7 @@
             </div>
 
         </el-affix>
-        <div>
+        <div style="padding-left: 20px;">
             <Ranking v-if="currentMenu === 'Ranking'"></Ranking>
             <ClassifiedPlaylist v-if="currentMenu === 'ClassifiedPlaylist'"></ClassifiedPlaylist>
             <Winnow v-if="currentMenu === 'Winnow'"></Winnow>
@@ -25,18 +25,24 @@ import ClassifiedPlaylist from './components/ClassifiedPlaylist/index.vue'
 import Winnow from './components/Winnow/index.vue'
 import Singer from './components/Singer/index.vue'
 
-// import { watch } from 'vue'
+import { watch, ref, onMounted } from 'vue'
 import { useMusicMenu } from "./music";
-// import useLayOutSettingStore from '@/store/modules/setting'
+import { useThemeStore } from '@/store/modules/theme'
 
 const { menus, currentMenu } = useMusicMenu()
-// const { theme } = useLayOutSettingStore()
-// console.log('theme---', theme);
+const musicThemeStore = useThemeStore()
+const isBg = ref<boolean>()
 
-// watch(() => theme, (newValue, oldValue) => {
-//     console.log(`count从${oldValue}变成了${newValue}`)
-// })
-
+onMounted(() => {
+    musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
+})
+watch(
+    () => musicThemeStore.getTheme,
+    (newVal, oldVal) => {
+        console.log('newVal---', newVal);
+        newVal == 'dark' ? isBg.value = false : isBg.value = true;
+    }
+);
 
 </script>
 <style lang="scss" scoped>
@@ -44,6 +50,7 @@ const { menus, currentMenu } = useMusicMenu()
     h1 {
         font-weight: 700;
         font-size: 40px;
+        padding-left: 20px;
     }
 
     ::v-deep .el-tabs__nav-wrap::after {
@@ -51,6 +58,10 @@ const { menus, currentMenu } = useMusicMenu()
     }
 
     .tabs_bg {
+        background-color: #000 !important;
+    }
+
+    .tabs_bg1 {
         background-color: #fff;
     }
 }

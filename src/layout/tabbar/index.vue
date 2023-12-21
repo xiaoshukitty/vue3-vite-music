@@ -13,11 +13,11 @@
 import { Moon, Sunny, Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 //获取 setting 仓库
-import useLayOutSettingStore from '@/store/modules/setting'
+import { useThemeStore } from '@/store/modules/theme'
 //引入操作本地存储工具方法
 import { SET_STORAGE, GET_STORAGE } from '@/utils/storage'
 
-let layOutSettingStore = useLayOutSettingStore();
+let layOutThemeStore = useThemeStore();
 let search_ipt = ref<string>('')
 //收集开关
 let dark = ref<boolean>(false)
@@ -33,14 +33,15 @@ if (GET_STORAGE('THEME') == 'dark') {
 }
 
 const changeDark = () => {
+
     //判断标签是否有 dark
     if (dark.value) {
         html.className = 'dark';
-        layOutSettingStore.theme = 'dark'
+        layOutThemeStore.theme = 'dark'
         SET_STORAGE('THEME', 'dark');
     } else {
         html.className = '';
-        layOutSettingStore.theme = 'light';
+        layOutThemeStore.theme = 'light';
         SET_STORAGE('THEME', 'light');
     }
 }
