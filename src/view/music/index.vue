@@ -2,7 +2,7 @@
     <div class="music">
         <h1>音乐馆</h1>
         <el-affix :offset="56">
-            <div style="padding-left: 20px;" :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
+            <div :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
                 <el-tabs v-model="currentMenu">
                     <el-tab-pane v-for=" menu  in  menus " :key="menu.name" :label="menu.label" :name="menu.name"
                         class="text-main" />
@@ -10,7 +10,7 @@
             </div>
 
         </el-affix>
-        <div style="padding-left: 20px;">
+        <div >
             <Ranking v-if="currentMenu === 'Ranking'"></Ranking>
             <ClassifiedPlaylist v-if="currentMenu === 'ClassifiedPlaylist'"></ClassifiedPlaylist>
             <Winnow v-if="currentMenu === 'Winnow'"></Winnow>
@@ -49,7 +49,6 @@ watch(
     h1 {
         font-weight: 700;
         font-size: 40px;
-        padding-left: 20px;
     }
 
     ::v-deep .el-tabs__nav-wrap::after {
@@ -57,7 +56,7 @@ watch(
     }
 
     .tabs_bg {
-        background-color: #000 !important;
+        background-color: #121212 !important;
     }
 
     .tabs_bg1 {
