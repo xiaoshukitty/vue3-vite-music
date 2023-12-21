@@ -4,6 +4,8 @@ import {
   ExclusivePlaylist,
   RecommendedMusic,
   RecommendedMv,
+  ExclusivetList,
+  RecommendationStation
 } from "./types";
 
 //banner 接口
@@ -34,6 +36,30 @@ export async function useRecommendedMusic() {
 export async function useRecommendedMv() {
   const { result } = await request.get<{ result: RecommendedMv[] }>(
     "personalized/mv"
+  );
+  return result;
+}
+
+/**音乐馆 */
+
+//独家放送
+export async function useExclusivetList(
+  limit: number = 10,
+  offset: number = 0
+) {
+  const { result } = await request.get<{ result: ExclusivetList[] }>(
+    "personalized/privatecontent/list",
+    {
+      limit: limit,
+      offset: offset,
+    }
+  );
+  return result;
+}
+//推荐电台
+export async function useRecommendationStation() {
+  const { result } = await request.get<{ result: RecommendationStation[] }>(
+    "personalized/djprogram"
   );
   return result;
 }

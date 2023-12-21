@@ -22,7 +22,7 @@ const { getRecommendedMvData } = useMusicStore()
 
 
 onMounted(async () => {
-    console.log('recommendedMvData---', recommendedMvData);
+    // console.log('recommendedMvData---', recommendedMvData);
 
     await getRecommendedMvData();
 })

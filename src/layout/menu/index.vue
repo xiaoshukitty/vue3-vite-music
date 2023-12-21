@@ -17,12 +17,12 @@ let $router = useRouter();
 let $route = useRoute();
 
 
-console.log('$router---', $route);
+// console.log('$router---', $route);
 
 // console.log('menuList---', menuList);
 //点击菜单回调
 const goRoute = (val: any) => {
-    console.log('val--', val);
+    // console.log('val--', val);
 
     // 路由跳转
     $router.push(val.path)

@@ -57,3 +57,27 @@ export interface RecommendedMv {
   artistId: number;
   alg: string;
 }
+
+/**音乐馆 */
+//独家放送接口类型
+export interface ExclusivetList {
+  id: number;
+  url: string;
+  picUrl: string;
+  sPicUrl: string;
+  type: number;
+  copywriter: string;
+  name: string;
+  time: number;
+}
+
+//推荐电台
+export interface RecommendationStation {
+  id: number;
+  type: number;
+  name: string;
+  copywriter: string;
+  picUrl: string;
+  canDislike: boolean;
+  trackNumberUpdateTime?: any;
+}

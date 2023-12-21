@@ -19,12 +19,12 @@ const { banners } = toRefs(useBannerStore())
 
 onMounted(async () => {
     await getBanners()
-    console.log('banners---',banners);
+    // console.log('banners---',banners);
     
 })
 
 const playBack = (item: Banner) => {
-    console.log('item---', item);
+    // console.log('item---', item);
 }
 
 </script>

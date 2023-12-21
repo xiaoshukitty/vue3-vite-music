@@ -6,12 +6,16 @@ import {
   useExclusivePlaylist,
   useRecommendedMusic,
   useRecommendedMv,
+  useExclusivetList,
+  useRecommendationStation
 } from "@/api/index";
 // 倒入专属歌单类型
 import type {
   ExclusivePlaylist,
   RecommendedMusic,
   RecommendedMv,
+  ExclusivetList,
+  RecommendationStation
 } from "@/api/types";
 
 export const useMusicStore = defineStore("useMusicStore", () => {
@@ -38,6 +42,21 @@ export const useMusicStore = defineStore("useMusicStore", () => {
     recommendedMvData.value = await useRecommendedMv();
   };
 
+  /**音乐馆 */
+  // 独家放送
+  const exclusiveMusicData = ref<ExclusivetList[]>([]);
+  const getExclusiveMusicData = async () => {
+    if (exclusiveMusicData.value.length) return;
+    exclusiveMusicData.value = await useExclusivetList(4);
+  };
+
+  //推荐电台
+  const recommendationStationData = ref<RecommendationStation[]>([]);
+  const getRecommendationStationData = async () => {
+    if (exclusiveMusicData.value.length) return;
+    recommendationStationData.value = await useRecommendationStation();
+  };
+
   return {
     exclusivePlaylistData,
     getExclusivePlaylistData,
@@ -47,5 +66,12 @@ export const useMusicStore = defineStore("useMusicStore", () => {
 
     recommendedMvData,
     getRecommendedMvData,
+
+    exclusiveMusicData,
+    getExclusiveMusicData,
+
+    recommendationStationData,
+    getRecommendationStationData
+    
   };
 });

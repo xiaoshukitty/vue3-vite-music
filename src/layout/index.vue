@@ -40,7 +40,7 @@ let useStore = useUserStore();
 
 //获取路由对象
 let $router = useRoute();
-console.log('222', $router);
+// console.log('222', $router);
 </script>
 <script lang="ts">
 export default {

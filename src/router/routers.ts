@@ -36,29 +36,6 @@ export const constantRouter = [
   },
   {
     //登录成功展示数据的路由
-    path: "/radioSation",
-    component: () => import("@/layout/index.vue"),
-    name: "radioSation",
-    meta: {
-      title: "电台",
-      hidden: false,
-      icon: "",
-    },
-    redirect: "/radioSation",
-    children: [
-      {
-        path: "/radioSation",
-        component: () => import("@/view/radioSation/index.vue"),
-        meta: {
-          title: "电台",
-          hidden: false,
-          icon: "HomeFilled",
-        },
-      },
-    ],
-  },
-  {
-    //登录成功展示数据的路由
     path: "/music",
     component: () => import("@/layout/index.vue"),
     name: "music",
@@ -80,6 +57,30 @@ export const constantRouter = [
       },
     ],
   },
+  {
+    //登录成功展示数据的路由
+    path: "/radioSation",
+    component: () => import("@/layout/index.vue"),
+    name: "radioSation",
+    meta: {
+      title: "电台",
+      hidden: false,
+      icon: "",
+    },
+    redirect: "/radioSation",
+    children: [
+      {
+        path: "/radioSation",
+        component: () => import("@/view/radioSation/index.vue"),
+        meta: {
+          title: "电台",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+    ],
+  },
+
   {
     //登录成功展示数据的路由
     path: "/video",
