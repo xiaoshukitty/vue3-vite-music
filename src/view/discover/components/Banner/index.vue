@@ -24,7 +24,7 @@ onMounted(async () => {
 })
 
 const playBack = (item: Banner) => {
-    // console.log('item---', item);
+    console.log('item---', item);
 }
 
 </script>

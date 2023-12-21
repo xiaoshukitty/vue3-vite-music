@@ -38,8 +38,7 @@ onMounted(() => {
 })
 watch(
     () => musicThemeStore.getTheme,
-    (newVal, oldVal) => {
-        console.log('newVal---', newVal);
+    (newVal: any) => {
         newVal == 'dark' ? isBg.value = false : isBg.value = true;
     }
 );

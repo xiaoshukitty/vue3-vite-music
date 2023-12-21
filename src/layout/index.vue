@@ -22,8 +22,6 @@
 </template>
 
 <script setup lang='ts'>
-//获取路由对象
-import { useRoute } from 'vue-router';
 //引入菜单组件
 import Menu from './menu/index.vue'
 //引入右侧内容展示组件(二级路由)
@@ -38,9 +36,6 @@ import useLayOutSettingStore from '@/store/modules/setting'
 let LayOutSettingStore = useLayOutSettingStore();
 let useStore = useUserStore();
 
-//获取路由对象
-let $router = useRoute();
-// console.log('222', $router);
 </script>
 <script lang="ts">
 export default {
