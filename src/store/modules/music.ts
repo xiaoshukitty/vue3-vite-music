@@ -7,16 +7,21 @@ import {
   useRecommendedMusic,
   useRecommendedMv,
   useExclusivetList,
-  useRecommendationStation
+  useRecommendationStation,
+  useOfficialList,
 } from "@/api/index";
 // 倒入专属歌单类型
 import type {
   ExclusivePlaylist,
   RecommendedMusic,
   RecommendedMv,
+} from "@/api/types/recommended";
+//倒入 音乐馆 接口类型
+import {
   ExclusivetList,
-  RecommendationStation
-} from "@/api/types";
+  RecommendationStation,
+  OfficialList,
+} from "@/api/types/musicHall";
 
 export const useMusicStore = defineStore("useMusicStore", () => {
   // 专属音乐
@@ -57,6 +62,13 @@ export const useMusicStore = defineStore("useMusicStore", () => {
     recommendationStationData.value = await useRecommendationStation();
   };
 
+  //音乐馆-排行
+  const officialListData = ref<OfficialList[]>([]);
+  const getOfficialListData = async () => {
+    if (officialListData.value.length) return;
+    officialListData.value = await useOfficialList();
+  };
+
   return {
     exclusivePlaylistData,
     getExclusivePlaylistData,
@@ -71,7 +83,9 @@ export const useMusicStore = defineStore("useMusicStore", () => {
     getExclusiveMusicData,
 
     recommendationStationData,
-    getRecommendationStationData
-    
+    getRecommendationStationData,
+
+    officialListData,
+    getOfficialListData,
   };
 });

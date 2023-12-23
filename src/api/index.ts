@@ -4,9 +4,12 @@ import {
   ExclusivePlaylist,
   RecommendedMusic,
   RecommendedMv,
+} from "@/api/types/recommended";
+import {
   ExclusivetList,
-  RecommendationStation
-} from "./types";
+  RecommendationStation,
+  OfficialList,
+} from "@/api/types/musicHall";
 
 //banner 接口
 export async function useBanner() {
@@ -62,4 +65,12 @@ export async function useRecommendationStation() {
     "personalized/djprogram"
   );
   return result;
+}
+
+// 音乐馆-排行
+export async function useOfficialList() {
+  const { list } = await request.get<{ list: OfficialList[] }>(
+    "/toplist/detail"
+  );
+  return list;
 }
