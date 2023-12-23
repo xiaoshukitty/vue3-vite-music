@@ -3,7 +3,7 @@
         <Title :title="'独家放送'" />
         <div class="list">
             <div class="item" v-for="item in exclusiveMusicData" :key="item.id">
-                <img :src="item.picUrl" alt="">
+                <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 <span style="font-size: .75rem;">{{ item.name }}</span>
             </div>
         </div>
@@ -11,6 +11,8 @@
     </div>
 </template>
 <script setup lang='ts'>
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
+
 import { toRefs, onMounted } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
 

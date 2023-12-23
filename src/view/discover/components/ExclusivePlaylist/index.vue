@@ -4,7 +4,7 @@
         <div class="block">
             <div class="block_list" v-for="(item, index) in exclusivePlaylistData" :key="index">
                 <div class="block_item">
-                    <img :src="item.picUrl" alt="">
+                    <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 </div>
                 <div class="text">{{ item.name }}</div>
             </div>
@@ -14,7 +14,7 @@
 
 <script setup lang='ts'>
 import Title from '@/components/common/Title/index.vue'
-
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
 

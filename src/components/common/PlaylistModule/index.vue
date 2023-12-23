@@ -2,7 +2,7 @@
 import { transform } from 'lodash';
 <template>
     <div class="playlist" @click="playSkipBtn">
-        <el-image class="el_image" :src="url" :fit="fit" />
+        <el-image class="el_image" :src="imgSrc" :fit="fit" />
         <div class="mask"></div>
         <el-icon class="icon" :size="40" color="#fff" @click.stop="playBackBtn">
             <CaretRight />
@@ -11,6 +11,13 @@ import { transform } from 'lodash';
 </template>
 
 <script setup lang='ts'>
+
+const props = defineProps({
+    imgSrc: {
+        type: String,
+        default: ''
+    }
+})
 
 const fits = ['fill', 'contain', 'cover', 'none', 'scale-down']
 const url =
@@ -25,7 +32,6 @@ const playSkipBtn = () => {
 </script>
 <style scoped lang="scss">
 .playlist {
-    width: 200px;
     position: relative;
     cursor: pointer;
     overflow: hidden;

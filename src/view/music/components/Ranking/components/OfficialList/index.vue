@@ -3,7 +3,7 @@
     <div class="official">
         <div class="official_list" v-for="item in officialListData.slice(0, 4)" :key="item.id">
             <div class="official_name">
-                <img :src="item.coverImgUrl" alt="">
+                <PlaylistModule :imgSrc="item.coverImgUrl"></PlaylistModule>
             </div>
             <div class="official_name_list">
                 <div>{{ item.name }}</div>
@@ -18,7 +18,7 @@
     <div class="featured_Leaderboard">
         <div class="list" v-for="item in officialListData.slice(4)" :key="item.id">
             <div class="img">
-                <img :src="item.coverImgUrl" alt="">
+                <PlaylistModule :imgSrc="item.coverImgUrl"></PlaylistModule>
             </div>
             <div class="text">{{ item.name  }}</div>
         </div>
@@ -26,6 +26,9 @@
 </template>
 
 <script setup lang='ts'>
+
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
+
 import { toRefs, onMounted } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
 

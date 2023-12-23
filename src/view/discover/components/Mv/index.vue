@@ -3,7 +3,7 @@
         <Title :title="'推荐MV'" />
         <div class=mv_list>
             <div class="mv_item" v-for="item in recommendedMvData" :key="item.id">
-                <img :src="item.picUrl" alt="">
+                <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 <div>{{ item.name }}</div>
                 <div>{{ item.artistName }}</div>
             </div>
@@ -13,6 +13,7 @@
 
 <script setup lang='ts'>
 import Title from '@/components/common/Title/index.vue'
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
