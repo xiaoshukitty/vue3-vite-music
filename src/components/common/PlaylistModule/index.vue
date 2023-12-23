@@ -1,8 +1,7 @@
 
-import { transform } from 'lodash';
 <template>
     <div class="playlist" @click="playSkipBtn">
-        <el-image class="el_image" :src="imgSrc" :fit="fit" />
+        <el-image class="el_image" :src="imgSrc" :fit="fits" />
         <div class="mask"></div>
         <el-icon class="icon" :size="40" color="#fff" @click.stop="playBackBtn">
             <CaretRight />
@@ -12,7 +11,7 @@ import { transform } from 'lodash';
 
 <script setup lang='ts'>
 
-const props = defineProps({
+defineProps({
     imgSrc: {
         type: String,
         default: ''
@@ -20,8 +19,6 @@ const props = defineProps({
 })
 
 const fits = ['fill', 'contain', 'cover', 'none', 'scale-down']
-const url =
-    'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 
 const playBackBtn = () => {
     console.log('点击了播放');
