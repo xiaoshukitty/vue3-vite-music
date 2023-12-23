@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // 配置@别名
 import path from "path";
 
@@ -13,6 +13,10 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+    }),
+    createSvgIconsPlugin({
+      // 指定图标文件夹，绝对路径（NODE代码）
+      iconDirs: [path.resolve(process.cwd(), "src/icons")],
     }),
     Components({
       resolvers: [ElementPlusResolver()],
@@ -33,6 +37,7 @@ export default defineConfig({
       },
     },
   },
+
   // 构建输出配置
   build: {
     outDir: "./dist",

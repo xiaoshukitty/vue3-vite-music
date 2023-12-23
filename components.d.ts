@@ -20,6 +20,7 @@ declare module 'vue' {
     PlaylistModule: typeof import('./src/components/common/PlaylistModule/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
     Title: typeof import('./src/components/common/Title/index.vue')['default']
   }
 }

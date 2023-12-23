@@ -10,6 +10,11 @@ import pinia from "./store";
 //暗黑模式需要样式
 import "element-plus/theme-chalk/dark/css-vars.css";
 
+// 引入Svg组件
+import "virtual:svg-icons-register";
+
+import SvgIcon from "@/components/SvgIcon/index.vue";
+
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
 //获取应用实例对象
@@ -24,6 +29,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(router);
 // 注册 pinia 仓库
 app.use(pinia);
+
+app.component("SvgIcon", SvgIcon);
 
 //将应用挂载到挂载点上
 app.mount("#app");

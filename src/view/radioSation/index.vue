@@ -2,6 +2,7 @@
     <div class="radioSation">
         <h1>电台</h1>
         <PlaylistModule></PlaylistModule>
+        <SvgIcon name="Playback" :iconWidth="30" :iconHeight="30" :iconBackgroundColor="'pink'"></SvgIcon>
     </div>
 </template>
 
