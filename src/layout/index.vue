@@ -17,6 +17,11 @@
         <!-- 内容展示 -->
         <div class="layout_main" :class="{ fold: LayOutSettingStore.fold ? true : false }">
             <Main />
+            <div style="height: 70px;"></div>
+        </div>
+        <!-- 播放组件 -->
+        <div class="paly_back">
+            <PlayBack></PlayBack>
         </div>
     </div>
 </template>
@@ -28,6 +33,8 @@ import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 // 引入 tabbar组件
 import Tabbar from './tabbar/index.vue'
+import PlayBack from '@/components/common/PlayBack/index.vue'
+
 //获取用户相关的小仓库路由
 import useUserStore from '@/store/modules/user'
 //获取 layout相关配置的仓库
@@ -54,6 +61,7 @@ export default {
         padding: 30px 20px;
         color: #fff;
         transition: all .3s;
+        border-right: 1px solid #eee;
 
         .scrollbar {
             width: 100%;
@@ -80,6 +88,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         padding: 0 20px;
+        border-bottom: 1px solid #eee;
 
         &.fold {
             width: calc(100vw - $base-menu-min-width);
@@ -101,6 +110,13 @@ export default {
             width: calc(100vw - $base-menu-min-width);
             left: $base-menu-min-width;
         }
+    }
+
+    .paly_back {
+        position: fixed;
+        bottom: 0;
+        left: $base-menu-width;
+        width: calc(100% - $base-menu-width);
     }
 }
 </style>
