@@ -1,11 +1,12 @@
 <template>
     <div class="radioSation">
         <h1>电台</h1>
+        <PlaylistModule></PlaylistModule>
     </div>
 </template>
 
 <script setup lang='ts'>
-
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 </script>
 <style lang="scss" scoped>
 .radioSation {

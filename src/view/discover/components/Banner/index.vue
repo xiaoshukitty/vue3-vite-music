@@ -11,7 +11,7 @@
 <script setup lang='ts'>
 import { onMounted, toRefs } from "vue";
 import { useBannerStore } from '@/store/modules/banner'
-import { Banner } from "@/api/types";
+import { Banner } from "@/api/types/recommended";
 
 const { getBanners } = useBannerStore()
 const { banners } = toRefs(useBannerStore())
