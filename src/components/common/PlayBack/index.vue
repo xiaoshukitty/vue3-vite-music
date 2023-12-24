@@ -91,7 +91,6 @@
 </template>
 
 <script setup lang='ts'>
-import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { OpticalDisk } from '@/assets/images/index'
 import { usePlaySong } from '@/store/modules/playSong'
 import { toRefs, ref, onMounted, watch } from 'vue'

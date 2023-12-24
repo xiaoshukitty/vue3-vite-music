@@ -64,6 +64,8 @@ export const usePlaySong = defineStore({
       this.audio
         .play()
         .then((res) => {
+          console.log(res);
+          
           this.isPlaying = true;
 
           this.isPause = false;
