@@ -10,6 +10,7 @@ import {
   RecommendationStation,
   OfficialList,
 } from "@/api/types/musicHall";
+import { SongUrl, Song } from "@/api/types/index";
 
 //banner 接口
 export async function useBanner() {
@@ -73,4 +74,19 @@ export async function useOfficialList() {
     "/toplist/detail"
   );
   return list;
+}
+
+//获取播放音乐url
+export async function useSongUrl(id: number) {
+  const { data } = await request.get<{ data: SongUrl[] }>("/song/url", {
+    id: id,
+  });
+  return data[0];
+}
+// 音乐播放
+export async function useDetail(id: number) {
+  const { songs } = await request.get<{ songs: Song[] }>("/song/detail", {
+    ids: id,
+  });
+  return songs[0];
 }

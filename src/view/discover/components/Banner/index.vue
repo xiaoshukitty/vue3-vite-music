@@ -1,6 +1,6 @@
 <template>
     <div class="swiper">
-        <el-carousel :interval="2000" type="card" height="250px" trigger="click" :pause-on-hover="false" :autoplay="true">
+        <el-carousel :interval="2000" type="card" height="250px" trigger="click" :pause-on-hover="false" :autoplay="false">
             <el-carousel-item v-for="item in banners" :key="item.bannerId">
                 <img class="swiper_img" :src="item.pic" alt="" @click="playBack(item)">
             </el-carousel-item>
@@ -52,12 +52,15 @@ const playBack = (item: Banner) => {
         width: 100%;
         height: 100%;
         cursor: pointer;
-        border-radius: 0.5rem;
         -o-object-fit: cover;
         object-fit: cover;
         transition-property: all;
         transition-timing-function: cubic-bezier(.4, 0, .2, 1);
         transition-duration: .15s;
+    }
+
+    ::v-deep .el-carousel__item{
+        border-radius: 10px !important;
     }
 
 }

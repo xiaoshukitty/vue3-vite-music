@@ -2,7 +2,7 @@
     <div class="RecommendedMusic">
         <Title :title="'推荐新音乐'" />
         <div class="music_list">
-            <div class="music_item" v-for="item in recommendedMusicData" :key="item.id">
+            <div class="music_item" v-for="item in recommendedMusicData" :key="item.id" @dblclick="playMusic(item.id)">
                 <img :src="item.picUrl" alt="">
                 <div class="music_item_right">
                     <div>{{ item.name }}</div>
@@ -17,9 +17,11 @@
 import { toRefs, onMounted } from 'vue'
 import Title from '@/components/common/Title/index.vue'
 import { useMusicStore } from '@/store/modules/music'
+import { usePlaySong } from '@/store/modules/playSong'
 
 const { recommendedMusicData } = toRefs(useMusicStore())
 const { getRecommendedMusicData } = useMusicStore()
+const { playMusic } = usePlaySong()
 
 onMounted(async () => {
     await getRecommendedMusicData();
@@ -34,6 +36,7 @@ onMounted(async () => {
         font-size: .75rem;
 
         .music_item {
+            cursor: pointer;
             width: 19%;
             height: 50px;
             margin-bottom: 10px;

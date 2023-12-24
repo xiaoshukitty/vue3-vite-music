@@ -10,7 +10,7 @@
             </div>
 
         </el-affix>
-        <div >
+        <div>
             <Ranking v-if="currentMenu === 'Ranking'"></Ranking>
             <ClassifiedPlaylist v-if="currentMenu === 'ClassifiedPlaylist'"></ClassifiedPlaylist>
             <Winnow v-if="currentMenu === 'Winnow'"></Winnow>
@@ -56,7 +56,7 @@ watch(
     }
 
     .tabs_bg {
-        background-color: #121212 !important;
+        background-color: $base-dark !important;
     }
 
     .tabs_bg1 {

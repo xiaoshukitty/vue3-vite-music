@@ -3,6 +3,10 @@
 </template>
 
 <script setup lang="ts">
+import { userPlayerInit } from '@/store/modules/playSong'
+
+userPlayerInit();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>
