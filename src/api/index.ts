@@ -11,6 +11,8 @@ import {
   OfficialList,
 } from "@/api/types/musicHall";
 import { SongUrl, Song } from "@/api/types/index";
+//倒入详情接口
+import { ArtistDetail } from "@/api/types/details";
 
 //banner 接口
 export async function useBanner() {
@@ -89,4 +91,27 @@ export async function useDetail(id: number) {
     ids: id,
   });
   return songs[0];
+}
+
+//歌手详情信息列表
+export async function useArtistDetail(id: number) {
+  const { data } = await request.get<{ data: ArtistDetail }>("artist/detail", {
+    id: id,
+  });
+  return data;
+}
+
+//详情获取列表数据接口
+export async function useArtistSongs(
+  id: number,
+  order: string = "time",
+  limit: number = 10,
+  offset: number = 0
+) {
+  return await request.get<{ songs: Song[] }>("artist/songs", {
+    id: id,
+    order: order,
+    limit: limit,
+    offset: offset,
+  });
 }

@@ -1,13 +1,18 @@
 <template>
     <div class="radioSation">
         <h1>电台</h1>
-        <PlaylistModule></PlaylistModule>
+        <div @click="goToBack('playDetails', 11564)">去详情页面</div>
         <SvgIcon name="Playback" :iconWidth="30" :iconHeight="30" :iconBackgroundColor="'pink'"></SvgIcon>
     </div>
 </template>
 
 <script setup lang='ts'>
-import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
+import { useRouter } from "vue-router";
+
+const router = useRouter()
+const goToBack = (name: string, id: number) => {
+    router.push({ path: name, query: { id: id } })
+}
 </script>
 <style lang="scss" scoped>
 .radioSation {

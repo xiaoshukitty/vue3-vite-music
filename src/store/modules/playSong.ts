@@ -26,7 +26,37 @@ export const usePlaySong = defineStore({
     dragSliderInput: false, //是否拖动进度条
     drawer: false, //歌单列表抽屉组件开关
   }),
-  getters: {},
+  getters: {
+    // 拿到要播放的 id
+    thisIndex: (state) => {
+      return state.playList.findIndex((song) => song.id === state.id);
+    },
+    //播放列表长度
+    playListCount: (state) => {
+      return state.playList.length;
+    },
+    //拿到上一首的id
+    prevSong(state): Song {
+      const { thisIndex } = this;
+      console.log("上一首", thisIndex);
+      if (thisIndex === 0) {
+        return state.playList[state.playList.length - 1];
+      } else {
+        const prevIndex: number = thisIndex - 1;
+        return state.playList[prevIndex];
+      }
+    },
+    //拿下一首播放id
+    nextSongStore(state): Song {
+      const { thisIndex, playListCount } = this;
+      if (thisIndex === playListCount - 1) {
+        return state.playList[0];
+      } else {
+        const nextIndex: number = thisIndex + 1;
+        return state.playList[nextIndex];
+      }
+    },
+  },
   actions: {
     //播放、暂停
     playBackMusic() {
@@ -49,10 +79,15 @@ export const usePlaySong = defineStore({
     //上一首
     previousSong() {
       console.log("上一首");
+      this.playMusic(this.prevSong.id);
     },
     //下一首
     nextSong() {
-      console.log("下一首");
+      if (this.loopType === 2) {
+        this.randomPlay();
+      } else {
+        this.playMusic(this.nextSongStore.id);
+      }
     },
     //点击播放
     async playMusic(id: number) {
@@ -65,7 +100,7 @@ export const usePlaySong = defineStore({
         .play()
         .then((res) => {
           console.log(res);
-          
+
           this.isPlaying = true;
 
           this.isPause = false;

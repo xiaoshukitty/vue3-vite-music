@@ -104,4 +104,36 @@ export const constantRouter = [
       },
     ],
   },
+  //播放列表
+  {
+    path: "/playlist",
+    component: () => import("@/layout/index.vue"),
+    name: "playlist",
+    meta: {
+      title: "播放列表",
+      hidden: true,
+      icon: "",
+    },
+    redirect: "/playlist",
+    children: [
+      {
+        path: "/playlist",
+        component: () => import("@/view/play/playList/index.vue"),
+        meta: {
+          title: "播放列表",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+      {
+        path: "/playDetails",
+        component: () => import("@/view/play/playDetails/index.vue"),
+        meta: {
+          title: "播放列表详情",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+    ],
+  },
 ];
