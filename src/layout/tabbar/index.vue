@@ -10,7 +10,7 @@
 
 <script setup lang='ts'>
 import SongSearch from '@/components/common/SongSearch/index.vue'
-import { Moon, Sunny, Search } from '@element-plus/icons-vue'
+import { Moon, Sunny } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 //获取 setting 仓库
 import { useThemeStore } from '@/store/modules/theme'

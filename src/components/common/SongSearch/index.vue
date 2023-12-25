@@ -60,7 +60,7 @@ import type { SearchHotDetail } from '@/api/types/tabbar'
 import { useSearchStore } from "@/store/modules/search"
 import { useNumberFormat } from '@/utils/index'
 import { usePlaySong } from '@/store/modules/playSong'
-import { ref, onMounted, toRefs } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from "vue-router";
 // 倒入 lodash 中的防抖
 import { debounce } from 'lodash'
@@ -74,7 +74,8 @@ const router = useRouter()
 //拿播放时间
 const { playMusic } = usePlaySong();
 //搜索 防抖
-const searchInput = debounce((value: string | number) => suggest(), 500, { 'maxWait': 1000 })
+// const searchInput = debounce((value: string | number) => suggest(), 500, {'maxWait': 1000})
+const searchInput = debounce(() => suggest(), 500, { 'maxWait': 1000 })
 
 //搜索热门
 const goToHot = (val: string) => {
