@@ -49,7 +49,6 @@ const activeName = ref('song')
 onMounted(async () => {
     detailsData.value = await useArtistDetail(id)
     isFlag.value = true;
-    console.log('detailsData.value---', detailsData.value.artist);
 
 })
 
