@@ -28,6 +28,8 @@ declare module 'vue' {
     PlaylistModule: typeof import('./src/components/common/PlaylistModule/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SongInfoHead: typeof import('./src/components/common/SongInfoHead/index.vue')['default']
+    SongList: typeof import('./src/components/common/SongList/index.vue')['default']
     SongSearch: typeof import('./src/components/common/SongSearch/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
     Title: typeof import('./src/components/common/Title/index.vue')['default']

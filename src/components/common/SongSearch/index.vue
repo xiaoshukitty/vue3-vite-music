@@ -33,7 +33,7 @@
                         </template>
                         <template v-if="item === 'albums'">
                             <div v-for="itemAlbums in suggestData.albums" :key="itemAlbums.id"
-                                class="item_albums dflex ellipsis">
+                                class="item_albums dflex ellipsis" @click="routerPush('albums', itemAlbums.id)">
                                 <div>{{ itemAlbums.name }}</div>
                                 <div> - {{ itemAlbums.artist.name }}</div>
                             </div>
@@ -207,6 +207,6 @@ const getTitle = (name: string) => {
 <style>
 .el-popover {
     padding: 0 !important;
-    inset: 56.5px auto auto 220px !important;
+    /* inset: 56.5px auto auto 220px !important; */
 }
 </style>

@@ -134,6 +134,15 @@ export const constantRouter = [
           icon: "HomeFilled",
         },
       },
+      {
+        path: "/albums",
+        component: () => import("@/view/play/albums/index.vue"),
+        meta: {
+          title: "专辑",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
     ],
   },
 ];

@@ -13,6 +13,8 @@ import {
 import { SongUrl, Song } from "@/api/types/index";
 //倒入详情接口
 import { ArtistDetail } from "@/api/types/details";
+//倒入歌手专辑接口类型
+import { Album } from "./types/album";
 
 //banner 接口
 export async function useBanner() {
@@ -114,4 +116,14 @@ export async function useArtistSongs(
     limit: limit,
     offset: offset,
   });
+}
+
+// 歌手专辑接口
+export async function useAlbum(id: number) {
+  const { album, songs } = await request.get<{ album: Album; songs: Song[] }>(
+    "album",
+    { id: id }
+  );
+
+  return { album, songs };
 }
