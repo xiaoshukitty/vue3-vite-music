@@ -1,1 +1,0 @@
-import{af as e}from"./index-oPTR38Ik.js";const t=(e,t)=>{localStorage.setItem(e,t)},a=e=>localStorage.getItem(e),s=e("theme",{state:()=>({theme:a("THEME")}),getters:{getTheme:e=>e.theme},actions:{}});export{a as G,t as S,s as u};
