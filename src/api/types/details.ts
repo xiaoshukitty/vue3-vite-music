@@ -5,6 +5,9 @@ export interface ArtistDetail {
 	blacklist: boolean;
 	preferShow: number;
 	showPriMsg: boolean;
+	picUrl?: any;
+	name?:any;
+	publishTime?:any;
 	secondaryExpertIdentiy: ArtistDetailSecondaryExpertIdentiy[];
 }
 export interface ArtistDetailIdentify {

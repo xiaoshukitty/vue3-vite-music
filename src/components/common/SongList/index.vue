@@ -33,15 +33,13 @@
 <script setup lang='ts'>
 import {
     CaretRight,
-    Download,
-    Histogram,
     VideoCamera
 } from '@element-plus/icons-vue'
 import { Song } from "@/api/types/index";
 import { convertToHMS } from '@/utils/index'
 import { usePlaySong } from "@/store/modules/playSong";
 
-defineProps<{ songsList: Song }>()
+defineProps<{ songsList: Song, id: number }>()
 
 const { playMusic } = usePlaySong()
 //跳转到 mv 页面

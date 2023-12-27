@@ -1,10 +1,10 @@
 <template>
-    <div v-if="isFlag">
-        <SongInfoHead :componentsType="'albums'" :detailsData="albumData"></SongInfoHead>
+    <div v-if="albumData">
+        <SongInfoHead :albumData="albumData"></SongInfoHead>
     </div>
-    <el-tabs v-model="activeName" class="demo-tabs" v-if="isFlag">
-        <el-tab-pane :label="`歌曲 ${songsList.length}`" name="song">
-            <SongList :songsList="songsList"></SongList>
+    <el-tabs v-model="activeName" class="demo-tabs" v-if="albumData">
+        <el-tab-pane :label="`歌曲 ${num}`" name="song">
+            <SongList :songsList="songsList" :id="id"></SongList>
         </el-tab-pane>
         <el-tab-pane label="评论" name="review">review</el-tab-pane>
         <el-tab-pane label="专辑详情" name="albumDetails">albumDetails</el-tab-pane>
@@ -21,17 +21,17 @@ import type { Album } from '@/api/types/album'
 import { Song } from "@/api/types/index";
 
 const albumData = ref<Album>()
-const songsList = ref<Song>()
+const songsList = ref<Song[]>([])
 const route = useRoute()
 const id = Number(route.query.id)
-const isFlag = ref<boolean>(false)
-const activeName = ref('song')
+const activeName = ref<string>('song')
+const num = ref<number>()
 
 onMounted(async () => {
     const { album, songs } = await useAlbum(id)
     albumData.value = album;
     songsList.value = songs;
-    isFlag.value = true;
+    num.value = songs.length;
 
 })
 </script>
