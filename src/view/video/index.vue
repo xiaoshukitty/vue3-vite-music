@@ -7,9 +7,6 @@
 </template>
 
 <script setup lang='ts'>
-import {
-    CaretRight
-} from '@element-plus/icons-vue'
 import MvVideo from './components/ MvVideo.vue'
 </script>
 <style scoped></style>

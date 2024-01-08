@@ -9,7 +9,7 @@
 
 <script setup lang='ts'>
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
-import { onMounted, ref, reactive, toRefs } from 'vue'
+import { onMounted, toRefs } from 'vue'
 import { useMvVideoStore } from '@/store/modules/mvVideo'
 const { mvVideoData } = toRefs(useMvVideoStore())
 const { getMvVideoData } = useMvVideoStore()
