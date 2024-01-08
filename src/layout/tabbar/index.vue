@@ -1,5 +1,6 @@
 <template>
     <div class="tabbar_left">
+        <NextPage></NextPage>
         <SongSearch></SongSearch>
     </div>
     <div class="tabbar_right">
@@ -10,6 +11,7 @@
 
 <script setup lang='ts'>
 import SongSearch from '@/components/common/SongSearch/index.vue'
+import NextPage from '@/components/common/NextPage/index.vue'
 import { Moon, Sunny } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 //获取 setting 仓库
@@ -46,4 +48,9 @@ const changeDark = () => {
     }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tabbar_left {
+    display: flex;
+    align-items: center;
+}
+</style>
