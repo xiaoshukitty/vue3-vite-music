@@ -1,1 +1,0 @@
-import{w as e,y as r}from"./index-YIGbLrC0.js";class s extends Error{constructor(e){super(e),this.name="ElementPlusError"}}function t(e,r){throw new s(`[${e}] ${r}`)}function o(e,r){}const n=({from:s,replacement:t,scope:o,version:n,ref:a,type:c="API"},i)=>{e((()=>r(i)),(e=>{}),{immediate:!0})};export{o as d,t,n as u};
