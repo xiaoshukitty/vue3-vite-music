@@ -2,7 +2,7 @@
     <div class="mv">
         <Title :title="'推荐MV'" />
         <div class=mv_list>
-            <div class="mv_item" v-for="item in recommendedMvData" :key="item.id">
+            <div class="mv_item" v-for="item in recommendedMvData" :key="item.id" @click.stop="goToBack('mvDetail', item.id)">
                 <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 <div>{{ item.name }}</div>
                 <div>{{ item.artistName }}</div>
@@ -17,14 +17,17 @@ import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
+import { useRouter } from "vue-router";
 
+const router = useRouter()
 const { recommendedMvData } = toRefs(useMusicStore())
 const { getRecommendedMvData } = useMusicStore()
 
+const goToBack = (name: string, id: number) => {
+    router.push({ path: name, query: { id: id } })
+}
 
 onMounted(async () => {
-    // console.log('recommendedMvData---', recommendedMvData);
-
     await getRecommendedMvData();
 })
 </script>
@@ -37,7 +40,6 @@ onMounted(async () => {
 
         .mv_item {
             width: 24%;
-            height: 200px;
             margin-right: 1%;
 
             img {
