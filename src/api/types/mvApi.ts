@@ -185,3 +185,13 @@ export interface VideoGroup {
 	selectTab: boolean;
 	abExtInfo?: any;
 }
+
+
+export interface VideoGroup {
+	id: number;
+	name: string;
+	url?: any;
+	relatedVideoType?: any;
+	selectTab: boolean;
+	abExtInfo?: any;
+}

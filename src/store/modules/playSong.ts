@@ -76,6 +76,23 @@ export const usePlaySong = defineStore({
         this.audio.pause();
       }
     },
+
+    //如音乐播放，则播放视频时暂停音乐
+    mvPlayPauseMusic() {
+      
+      if (!this.song.id) return;
+      this.isPlaying = false;
+      this.audio.pause();
+      this.isPause = true;
+    },
+    //如音乐播放，则播放视频时暂停音乐 ，关闭mv 时，音乐继续播放
+    mvPausePlayMUsic() {
+      if (!this.song.id) return;
+      this.isPlaying = true;
+      this.audio.play();
+      this.isPause = false;
+    },
+
     //上一首
     previousSong() {
       console.log("上一首");

@@ -1,7 +1,7 @@
 <template>
     <div class="radioSation">
         <h1>电台</h1>
-        <div @click="goToBack('playDetails', 11564)">去详情页面</div>
+        <div @click="goToBack('mvDetail', 10973299)">去详情页面</div>
         <SvgIcon name="Playback" :iconWidth="30" :iconHeight="30" :iconBackgroundColor="'pink'"></SvgIcon>
     </div>
 </template>

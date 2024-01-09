@@ -143,6 +143,15 @@ export const constantRouter = [
           icon: "HomeFilled",
         },
       },
+      {
+        path: "/mvDetail",
+        component: () => import("@/view/play/mvDetail/index.vue"),
+        meta: {
+          title: "播放mv",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
     ],
   },
 ];

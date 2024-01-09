@@ -8,16 +8,15 @@
 </template>
 
 <script setup lang='ts'>
-import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
-import { onMounted, toRefs } from 'vue'
-import { useMvVideoStore } from '@/store/modules/mvVideo'
-const { mvVideoData } = toRefs(useMvVideoStore())
-const { getMvVideoData } = useMvVideoStore()
 
-
-onMounted(async () => {
-    await getMvVideoData()
+defineProps({
+    mvVideoData: {
+        type: Object,
+        default: ''
+    }
 })
+
+import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 
 </script>
 <style scoped lang="scss">

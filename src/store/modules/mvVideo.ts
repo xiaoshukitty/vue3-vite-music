@@ -1,23 +1,18 @@
 import { defineStore } from "pinia";
-
-import { useVideoGroup } from "@/api/mvApi/index";
-import type { Video } from "@/api/types/mvApi";
-import { ref, reactive } from "vue";
+import { useVideoGroupList } from "@/api/mvApi/index";
+import type { VideoGroup } from "@/api/types/mvApi";
+import { ref } from "vue";
 
 export const useMvVideoStore = defineStore("useMvVideoStore", () => {
-  //全部视频
-  const pageInfo = reactive({
-    page: 1,
-    id: 0,
-  });
-  const mvVideoData = ref<Video[]>([]);
-  const getMvVideoData = async () => {
-    if (mvVideoData.value.length) return;
-    mvVideoData.value = await useVideoGroup(pageInfo.id, pageInfo.page - 1);
+  //全部视频 popover 列表
+  const mvVideoList = ref<VideoGroup[]>([]);
+  const getMvVideoList = async () => {
+    if (mvVideoList.value.length) return;
+    mvVideoList.value = await useVideoGroupList();
   };
 
   return {
-    mvVideoData,
-    getMvVideoData,
+    mvVideoList,
+    getMvVideoList,
   };
 });
