@@ -16,8 +16,8 @@
                 <div class="df">
                     <div class="music_mv">
                         <div>{{ item.name }}</div>
-                        <div style="display: flex; margin-left:5px;">
-                            <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv(item.id)">
+                        <div style="display: flex; margin-left:5px;" v-if="item.mv>0">
+                            <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv('mvDetail',item.mv)">
                                 <VideoCamera />
                             </el-icon>
                         </div>
@@ -51,7 +51,9 @@ import { Song } from "@/api/types/index";
 import { useArtistSongs } from '@/api/index'
 import { computed, onMounted, reactive, ref } from 'vue';
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
+const router = useRouter()
 const props = defineProps<{ id: number }>()
 
 
@@ -109,8 +111,8 @@ const playAll=()=>{
 }
 
 //跳转到 mv 页面
-const playMv = (id:number) =>{
-    console.log('id---',id);
+const playMv = (name: string, id: number) => {
+    router.push({ path: name, query: { id: id } })
 }
 </script>
 <style scoped lang="scss">

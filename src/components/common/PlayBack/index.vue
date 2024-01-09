@@ -9,7 +9,11 @@
                 <div class="song_left">
                     <img :src="song.al?.picUrl || OpticalDisk" alt="">
                     <div class="song_lyric_info">
-                        <div class="lyric_info">{{ song.name || '开源云音乐' }}</div>
+                        <div style="display: flex;">
+                            <div v-if="songUrl.freeTrialInfo?.end > 0" class="audition">试听
+                            </div>
+                            <div class="lyric_info">{{ song.name || '开源云音乐' }}</div>
+                        </div>
                         <div class="lyric_cion">
                             <div class="lyric_cion_hover">
                                 <el-icon size="16">
@@ -99,7 +103,7 @@ import { useThemeStore } from '@/store/modules/theme'
 
 const isBg = ref<boolean>()
 const musicThemeStore = useThemeStore()
-const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider } = toRefs(usePlaySong())
+const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl } = toRefs(usePlaySong())
 
 onMounted(() => {
     musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
@@ -152,6 +156,16 @@ watch(
                     font-size: 12px;
                     height: 45px;
                     justify-content: space-around;
+
+                    .audition {
+                        font-size: 10px;
+                        margin-right: 5px;
+                        border-radius: 4px;
+                        --tw-text-opacity: 1;
+                        color: rgb(255 255 255 / var(--tw-text-opacity));
+                        --tw-bg-opacity: 1;
+                        background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+                    }
 
                     .lyric_cion {
                         display: flex;

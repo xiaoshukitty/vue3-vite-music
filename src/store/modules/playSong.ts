@@ -22,7 +22,7 @@ export const usePlaySong = defineStore({
     playBlackTime: 0, //当前播放时间
     endPlay: false, //是否播放结束
     audioSlider: Number(localStorage.getItem(keys.AUDIO)) || 60, //音量
-    loopType: 0, //循环模式 0 单曲循环 1 列表循环 2随机播放  播放模式
+    loopType: 1, //循环模式 0 单曲循环 1 列表循环 2随机播放  播放模式
     dragSliderInput: false, //是否拖动进度条
     drawer: false, //歌单列表抽屉组件开关
   }),
