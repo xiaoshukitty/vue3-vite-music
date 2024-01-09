@@ -2,7 +2,7 @@
 
 
 
-![Image text](https://github.com/xiaoshukitty/img-folder/blob/main/WechatIMG203.jpg)
+![Image text](https://raw.githubusercontent.com/xiaoshukitty/img-folder/main/WX20240109-161825.png)
 
 
 
