@@ -16,8 +16,8 @@
                 <div class="df">
                     <div class="music_mv">
                         <div>{{ item.name }}</div>
-                        <div style="display: flex; margin-left:5px;" v-if="item.mv>0">
-                            <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv('mvDetail',item.mv)">
+                        <div style="display: flex; margin-left:5px;" v-if="item.mv > 0">
+                            <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv('mvDetail', item.mv)">
                                 <VideoCamera />
                             </el-icon>
                         </div>
@@ -57,8 +57,10 @@ const router = useRouter()
 const props = defineProps<{ id: number }>()
 
 
-const { id } = storeToRefs(usePlaySong())
-const { playMusic ,pushPlayList} = usePlaySong()
+const { id, lyricData } = storeToRefs(usePlaySong())
+const { playMusic, pushPlayList } = usePlaySong()
+
+
 
 const songList = ref<Song[]>([]);
 const pageData = reactive({
@@ -102,10 +104,12 @@ const getData = async () => {
 const loadMore = () => {
     pageData.page++;
     getData();
+
+console.log('---',lyricData);
 }
 
 //播放全部
-const playAll=()=>{
+const playAll = () => {
     pushPlayList(false, ...songList.value)
     playMusic(songList.value[0].id)
 }
@@ -129,14 +133,17 @@ const playMv = (name: string, id: number) => {
             .icon {
                 display: none;
             }
-            .icon:hover{
+
+            .icon:hover {
                 color: $base-background;
             }
-            .music_mv{
+
+            .music_mv {
                 display: flex;
                 align-items: center;
                 margin-left: 5px;
-                .mv_hover:hover{
+
+                .mv_hover:hover {
                     color: $base-background;
                 }
             }
@@ -186,5 +193,4 @@ const playMv = (name: string, id: number) => {
     display: flex;
     justify-content: space-between;
     padding-right: 20px;
-}
-</style>
+}</style>

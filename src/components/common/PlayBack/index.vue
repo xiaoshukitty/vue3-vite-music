@@ -7,7 +7,7 @@
         <div class="song_info">
             <div class="flex" style="display:flex;align-items: center;">
                 <div class="song_left">
-                    <img :src="song.al?.picUrl || OpticalDisk" alt="">
+                    <img :src="song.al?.picUrl || OpticalDisk" alt="" @click="lyricPic">
                     <div class="song_lyric_info">
                         <div style="display: flex;">
                             <div v-if="songUrl.freeTrialInfo?.end > 0" class="audition">试听
@@ -103,7 +103,7 @@ import { useThemeStore } from '@/store/modules/theme'
 
 const isBg = ref<boolean>()
 const musicThemeStore = useThemeStore()
-const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl } = toRefs(usePlaySong())
+const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl ,lyricData} = toRefs(usePlaySong())
 
 onMounted(() => {
     musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
@@ -114,6 +114,13 @@ watch(
         newVal == 'dark' ? isBg.value = false : isBg.value = true;
     }
 );
+
+const lyricPic = () => {
+    console.log('歌词111---',lyricData.value.lrc.lyric);
+    console.log('歌词222---',lyricData.value.klyric.lyric);
+
+    
+}
 
 </script>
 <style scoped lang="scss">

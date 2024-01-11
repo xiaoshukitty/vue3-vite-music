@@ -1,6 +1,8 @@
 import { defineStore, storeToRefs } from "pinia";
 import { useSongUrl, useDetail } from "@/api/index";
 import type { SongUrl, Song } from "@/api/types/index";
+import type { Lyric } from "@/api/types/lyric";
+import { useLyric } from "@/api/song/index";
 import { onMounted, onUnmounted, watch } from "vue";
 
 const keys = {
@@ -25,6 +27,7 @@ export const usePlaySong = defineStore({
     loopType: 1, //循环模式 0 单曲循环 1 列表循环 2随机播放  播放模式
     dragSliderInput: false, //是否拖动进度条
     drawer: false, //歌单列表抽屉组件开关
+    lyricData: {} as Lyric, //歌词数据
   }),
   getters: {
     // 拿到要播放的 id
@@ -79,7 +82,6 @@ export const usePlaySong = defineStore({
 
     //如音乐播放，则播放视频时暂停音乐
     mvPlayPauseMusic() {
-      
       if (!this.song.id) return;
       this.isPlaying = false;
       this.audio.pause();
@@ -106,6 +108,12 @@ export const usePlaySong = defineStore({
         this.playMusic(this.nextSongStore.id);
       }
     },
+    //歌词
+    async getLyricData(id: number) {
+      const data = await useLyric(id);
+      this.lyricData = data;
+      console.log("lyricData----", this.lyricData);
+    },
     //点击播放
     async playMusic(id: number) {
       if (id == this.id) return;
@@ -125,6 +133,7 @@ export const usePlaySong = defineStore({
           this.url = data.url;
           this.id = id;
           this.songDetail();
+          this.getLyricData(id);
         })
         .catch((res) => {
           console.log(res);
