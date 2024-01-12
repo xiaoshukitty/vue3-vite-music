@@ -101,6 +101,7 @@ import { toRefs, ref, onMounted, watch } from 'vue'
 import { convertToHMS } from '@/utils/index'
 import { useThemeStore } from '@/store/modules/theme'
 import { useRouter } from "vue-router";
+import { SET_STORAGE, GET_STORAGE } from '@/utils/storage'
 
 const router = useRouter()
 const isBg = ref<boolean>()
@@ -120,9 +121,15 @@ watch(
 const lyricPic = () => {
     // console.log('歌词111---', lyricData.value.lrc.lyric);
     // console.log('歌词222---', lyricData.value.klyric.lyric);
-    router.push({
-        name: 'lyricInfo'
-    })
+    if (GET_STORAGE('set-lyric') == 'open') {
+        SET_STORAGE('set-lyric', 'close');
+        router.back()
+    } else {
+        SET_STORAGE('set-lyric', 'open')
+        router.push({
+            name: 'lyricInfo'
+        })
+    }
 }
 
 </script>
