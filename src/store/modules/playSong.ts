@@ -1,7 +1,7 @@
 import { defineStore, storeToRefs } from "pinia";
 import { useSongUrl, useDetail } from "@/api/index";
 import type { SongUrl, Song } from "@/api/types/index";
-import type { Lyric } from "@/api/types/lyric";
+// import type { Lyric } from "@/api/types/lyric";
 import { useLyric } from "@/api/song/index";
 import { onMounted, onUnmounted, watch } from "vue";
 
@@ -27,7 +27,7 @@ export const usePlaySong = defineStore({
     loopType: 1, //循环模式 0 单曲循环 1 列表循环 2随机播放  播放模式
     dragSliderInput: false, //是否拖动进度条
     drawer: false, //歌单列表抽屉组件开关
-    lyricData: {} as Lyric, //歌词数据
+    lyricData: {} as any, //歌词数据
   }),
   getters: {
     // 拿到要播放的 id

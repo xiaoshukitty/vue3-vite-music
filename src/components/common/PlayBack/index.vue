@@ -106,7 +106,7 @@ import { SET_STORAGE, GET_STORAGE } from '@/utils/storage'
 const router = useRouter()
 const isBg = ref<boolean>()
 const musicThemeStore = useThemeStore()
-const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl, lyricData } = toRefs(usePlaySong())
+const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl } = toRefs(usePlaySong())
 
 onMounted(() => {
     musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
