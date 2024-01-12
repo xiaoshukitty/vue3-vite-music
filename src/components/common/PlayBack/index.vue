@@ -100,10 +100,12 @@ import { usePlaySong } from '@/store/modules/playSong'
 import { toRefs, ref, onMounted, watch } from 'vue'
 import { convertToHMS } from '@/utils/index'
 import { useThemeStore } from '@/store/modules/theme'
+import { useRouter } from "vue-router";
 
+const router = useRouter()
 const isBg = ref<boolean>()
 const musicThemeStore = useThemeStore()
-const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl ,lyricData} = toRefs(usePlaySong())
+const { previousSong, playBackMusic, nextSong, isPause, audioLength, playBlackTime, sliderChange, sliderInput, drawer, song, audioSlider, setAudioSlider, songUrl, lyricData } = toRefs(usePlaySong())
 
 onMounted(() => {
     musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
@@ -116,10 +118,11 @@ watch(
 );
 
 const lyricPic = () => {
-    console.log('歌词111---',lyricData.value.lrc.lyric);
-    console.log('歌词222---',lyricData.value.klyric.lyric);
-
-    
+    // console.log('歌词111---', lyricData.value.lrc.lyric);
+    // console.log('歌词222---', lyricData.value.klyric.lyric);
+    router.push({
+        name: 'lyricInfo'
+    })
 }
 
 </script>

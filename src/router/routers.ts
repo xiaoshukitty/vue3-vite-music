@@ -154,4 +154,27 @@ export const constantRouter = [
       },
     ],
   },
+  {
+    //登录成功展示数据的路由
+    path: "/lyricInfo",
+    component: () => import("@/layout/index.vue"),
+    name: "lyricInfo",
+    meta: {
+      title: "歌词",
+      hidden: true,
+      icon: "",
+    },
+    redirect: "/lyricInfo",
+    children: [
+      {
+        path: "/lyricInfo",
+        component: () => import("@/view/lyricInfo/index.vue"),
+        meta: {
+          title: "歌词",
+          hidden: false,
+          icon: "HomeFilled",
+        },
+      },
+    ],
+  },
 ];
