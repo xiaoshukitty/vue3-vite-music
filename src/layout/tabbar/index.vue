@@ -4,6 +4,7 @@
         <SongSearch></SongSearch>
     </div>
     <div class="tabbar_right">
+        <LoginClick></LoginClick>
         <el-switch v-model="dark" class="mt-2" style="margin-left: 24px" inline-prompt :active-icon="Sunny"
             :inactive-icon="Moon" @change="changeDark" />
     </div>
@@ -12,6 +13,7 @@
 <script setup lang='ts'>
 import SongSearch from '@/components/common/SongSearch/index.vue'
 import NextPage from '@/components/common/NextPage/index.vue'
+import LoginClick from './components/LoginClick.vue'
 import { Moon, Sunny } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 //获取 setting 仓库
@@ -50,6 +52,10 @@ const changeDark = () => {
 </script>
 <style lang="scss" scoped>
 .tabbar_left {
+    display: flex;
+    align-items: center;
+}
+.tabbar_right{
     display: flex;
     align-items: center;
 }

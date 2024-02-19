@@ -48,6 +48,8 @@ const selectVideo = (id: number) => {
     }, 500)
 };
 const getMvVideoData = async () => {
+    console.log(pageInfo.id, pageInfo.page - 1);
+    
     mvVideoData.value = await useVideoGroup(pageInfo.id, pageInfo.page - 1);
 }
 
