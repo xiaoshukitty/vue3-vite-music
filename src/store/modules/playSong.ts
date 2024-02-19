@@ -176,6 +176,7 @@ export const usePlaySong = defineStore({
       if (this.isPlaying && !this.dragSliderInput) {
         this.playBlackTime = parseInt(this.audio.currentTime.toString());
         this.audioLength = parseInt(this.audio.duration.toString());
+       
         this.endPlay = this.audio.ended;
       }
     },
@@ -193,6 +194,9 @@ export const usePlaySong = defineStore({
     },
     //播放结束
     playEnd() {
+
+      this.isPause = true;
+      this.isPlaying = false;
       switch (this.loopType) {
         case 0:
           this.rePlay();
