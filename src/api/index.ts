@@ -16,6 +16,8 @@ import { AlbumArtistDetail } from "@/api/types/artistDetail";
 import { ArtistDetail } from "@/api/types/details";
 //倒入歌手专辑接口类型
 import { Album } from "./types/album";
+// 导入歌手详情借口
+import { Introduce } from "./types/introduce";
 
 //banner 接口
 export async function useBanner() {
@@ -130,6 +132,11 @@ export async function useArtistAlbum(
     limit: limit,
     offset: offset,
   });
+}
+
+//歌手详情
+export async function useIntroduce(id: number) {
+  return await request.get<Introduce>("artist/desc", { id: id });
 }
 
 // 歌手专辑接口
