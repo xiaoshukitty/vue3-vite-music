@@ -18,6 +18,8 @@ import { ArtistDetail } from "@/api/types/details";
 import { Album } from "./types/album";
 // 导入歌手详情借口
 import { Introduce } from "./types/introduce";
+//导入歌手视频接口
+import { Mv } from "./types/songMv";
 
 //banner 接口
 export async function useBanner() {
@@ -128,6 +130,19 @@ export async function useArtistAlbum(
   offset: number = 0
 ) {
   return await request.get<{ hotAlbums: AlbumArtistDetail[] }>("artist/album", {
+    id: id,
+    limit: limit,
+    offset: offset,
+  });
+}
+
+// 歌手视频
+export async function useArtistMv(
+  id: number,
+  limit: number = 10,
+  offset: number = 0
+) {
+  return await request.get<{ mvs: Mv[] }>("artist/mv", {
     id: id,
     limit: limit,
     offset: offset,

@@ -23,7 +23,9 @@
         <el-tab-pane :label="`专辑 ${detailsData?.artist.albumSize}`" name="collection">
             <Album :id="id"></Album>
         </el-tab-pane>
-        <el-tab-pane :label="`视频 ${detailsData?.artist.musicSize}`" name="M">Role</el-tab-pane>
+        <el-tab-pane :label="`视频 ${detailsData?.artist.musicSize}`" name="M">
+            <PersonageMV :id="id"></PersonageMV>
+        </el-tab-pane>
         <el-tab-pane label="详情" name="songDetails">
             <Introduce :id="id"></Introduce>
         </el-tab-pane>
@@ -35,6 +37,7 @@ import { onMounted, ref } from 'vue'
 import Song from './components/Song.vue'
 import Album from './components/Album.vue'
 import Introduce from './components/Introduce.vue'
+import PersonageMV from './components/PersonageMV.vue'
 import { useArtistDetail } from '@/api/index'
 import { useRoute } from "vue-router";
 import type { ArtistDetail } from '@/api/types/details'

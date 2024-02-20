@@ -1,7 +1,7 @@
 <template>
     <div class="album">
         <div class="album_list" v-for="(item, index) in albumList" :key="index">
-            <div class="album_item">
+            <div class="album_item" @click="routerPush('albums', item.id)">
                 <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 <div class="fs_14">{{ item.name }}</div>
                 <div class="fs_14 color">{{ useTimestamp(item.publishTime) }}</div>
@@ -19,8 +19,12 @@ import type { AlbumArtistDetail } from '@/api/types/artistDetail'
 import { computed, onMounted, reactive, ref } from 'vue';
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { useTimestamp } from '@/utils/index'
+import { useRouter } from "vue-router";
 
 const props = defineProps<{ id: number }>()
+
+//倒入路由模块
+const router = useRouter()
 const pageData = reactive({
     limit: 20, //一页多少条
     page: 1,//多少页
@@ -52,7 +56,11 @@ const getALbumData = async () => {
     pageData.loading = false
 }
 
-// 加载更多
+//跳转
+const routerPush = (name: string, id: number) => {
+    router.push({ path: name, query: { id: id } })
+}
+
 //加载一下页数据
 const loadMore = () => {
     pageData.page++;
