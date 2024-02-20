@@ -11,6 +11,7 @@ import {
   OfficialList,
 } from "@/api/types/musicHall";
 import { SongUrl, Song } from "@/api/types/index";
+import { AlbumArtistDetail } from "@/api/types/artistDetail";
 //倒入详情接口
 import { ArtistDetail } from "@/api/types/details";
 //倒入歌手专辑接口类型
@@ -113,6 +114,19 @@ export async function useArtistSongs(
   return await request.get<{ songs: Song[] }>("artist/songs", {
     id: id,
     order: order,
+    limit: limit,
+    offset: offset,
+  });
+}
+
+//获取歌手专辑
+export async function useArtistAlbum(
+  id: number,
+  limit: number = 10,
+  offset: number = 0
+) {
+  return await request.get<{ hotAlbums: AlbumArtistDetail[] }>("artist/album", {
+    id: id,
     limit: limit,
     offset: offset,
   });
