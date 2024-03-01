@@ -40,7 +40,7 @@
                         </template>
                         <template v-if="item === 'playlists'">
                             <div v-for="itemPlaylists in suggestData.playlists" :key="itemPlaylists.id"
-                                class="item_artists dflex ellipsis">
+                                class="item_artists dflex ellipsis" @click="routerPush('playList',itemPlaylists.id)">
                                 <el-avatar class="w24" size="small" :src="itemPlaylists.coverImgUrl" />
                                 <div>{{ itemPlaylists.name }}</div>
                             </div>

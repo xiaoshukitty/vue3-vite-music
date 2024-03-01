@@ -20,6 +20,8 @@ import { Album } from "./types/album";
 import { Introduce } from "./types/introduce";
 //导入歌手视频接口
 import { Mv } from "./types/songMv";
+// 导入搜索歌单接口类型
+import { PlayListDetail } from "./types/playlist";
 
 //banner 接口
 export async function useBanner() {
@@ -162,4 +164,20 @@ export async function useAlbum(id: number) {
   );
 
   return { album, songs };
+}
+
+// 搜索歌单
+export async function usePlayListDetail(id: number, s: number = 8) {
+  const { playlist } = await request.get<{ playlist: PlayListDetail }>(
+    "/playlist/detail",
+    { id: id, s: s }
+  );
+  return playlist;
+}
+
+export async function usePlayListTrackAll(id: number) {
+  const { songs } = await request.get<{ songs: Song[] }>("playlist/track/all", {
+    id: id,
+  });
+  return songs;
 }
