@@ -18,7 +18,7 @@
     </div>
     <el-tabs v-model="activeName" class="demo-tabs" v-if="isFlag">
         <el-tab-pane :label="`歌曲 ${detailsData?.artist.musicSize}`" name="song">
-            <Song :id="id"></Song>
+            <Song :id="id" :typeSelect="typeSelect"></Song>
         </el-tab-pane>
         <el-tab-pane :label="`专辑 ${detailsData?.artist.albumSize}`" name="collection">
             <Album :id="id"></Album>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import Song from './components/Song.vue'
 import Album from './components/Album.vue'
 import Introduce from './components/Introduce.vue'
@@ -48,15 +48,30 @@ import {
 } from '@element-plus/icons-vue'
 
 const route = useRoute()
-const id = Number(route.query.id);
+let id = Number(route.query.id);
 const detailsData = ref<ArtistDetail>()
 const isFlag = ref<boolean>(false)
 const activeName = ref('song')
 
 onMounted(async () => {
+    getUseArtistDetail(id)
+})
+
+const getUseArtistDetail = async (id: number) => {
     detailsData.value = await useArtistDetail(id);
     isFlag.value = true;
-})
+}
+
+watch(
+    () => route.query.id,
+    (newPath, oldPath) => {
+        if (newPath !== oldPath) {
+            getUseArtistDetail(Number(newPath));
+            id = Number(newPath)
+            isFlag.value = false;
+        }
+    }
+)
 
 </script>
 <style scoped lang="scss">

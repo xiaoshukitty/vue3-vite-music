@@ -10,8 +10,8 @@
                 <el-col :span="2">时长</el-col>
             </el-row>
             <div class="song_list">
-                <el-row class="h50 song_info" v-for="(item, index) in songsList" :key="index" @dblclick="playMusic(item.id)"
-                    :class="{ 'playing': id === item.id }">
+                <el-row class="h50 song_info" v-for="(item, index) in songsList" :key="index"
+                    @dblclick="playMusic(item.id)" :class="{ 'playing': id === item.id }">
                     <el-col class="music_song lh50" :span="14">
                         <div class="df">
                             <div class="music_mv">
@@ -41,7 +41,7 @@
 
 <script setup lang='ts'>
 import SongInfoHead from '@/components/common/SongInfoHead/index.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAlbum } from '@/api/index'
 import type { Album } from '@/api/types/album'
@@ -61,12 +61,29 @@ const activeName = ref<string>('song')
 const num = ref<number>()
 
 onMounted(async () => {
+
+    getUseAlbum(id)
+})
+
+watch(
+    () => route.query.id,
+    (newPath, oldPath) => {
+        if (newPath !== oldPath) {
+            getUseAlbum(Number(newPath))
+        }
+    }
+)
+
+
+const getUseAlbum = async (id: number) => {
     const { album, songs } = await useAlbum(id)
     albumData.value = album;
     songsList.value = songs;
     num.value = songs.length;
 
-})
+}
+
+
 const { playMusic } = usePlaySong()
 //跳转到 mv 页面
 const playMv = (id: number) => {

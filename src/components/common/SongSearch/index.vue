@@ -8,7 +8,8 @@
         <el-scrollbar height="400px">
             <div class="search_list" v-if="showHot">
                 <div style="font-size:16px; margin-bottom: 10px;">热门搜索</div>
-                <div class="hot_list" v-for="(item, index) in searchHotList" :key="index" @click="goToHot(item.searchWord)">
+                <div class="hot_list" v-for="(item, index) in searchHotList" :key="index"
+                    @click="goToHot(item.searchWord)">
                     <div class="hot_hover">{{ index + 1 }}. {{ item.searchWord }}</div>
                     <div style="color:red; margin-right:10px ;">{{ useNumberFormat(item.score) }}</div>
                 </div>
@@ -18,8 +19,8 @@
                     <div class="" v-for="(item, index) in suggestData.order" :key="index">
                         <div class="fs_16">{{ getTitle(item) }}</div>
                         <template v-if="item === 'songs'">
-                            <div v-for="itemSong in suggestData.songs" :key="itemSong.id" class="item_song dflex ellipsis"
-                                @click="songsMusic(itemSong.id)">
+                            <div v-for="itemSong in suggestData.songs" :key="itemSong.id"
+                                class="item_song dflex ellipsis" @click="songsMusic(itemSong.id)">
                                 <div>{{ itemSong.name }}</div>
                                 <div> - {{ itemSong.artists[0].name }}</div>
                             </div>
@@ -40,7 +41,7 @@
                         </template>
                         <template v-if="item === 'playlists'">
                             <div v-for="itemPlaylists in suggestData.playlists" :key="itemPlaylists.id"
-                                class="item_artists dflex ellipsis" @click="routerPush('playList',itemPlaylists.id)">
+                                class="item_artists dflex ellipsis" @click="routerPush('playList', itemPlaylists.id)">
                                 <el-avatar class="w24" size="small" :src="itemPlaylists.coverImgUrl" />
                                 <div>{{ itemPlaylists.name }}</div>
                             </div>
@@ -85,14 +86,14 @@ const goToHot = (val: string) => {
 }
 
 //获取焦点展示 popover 弹框
-const focusSearch=() => {
-    setTimeout(()=>{
+const focusSearch = () => {
+    setTimeout(() => {
         showSearchView.value = false;
-    },0)
+    }, 0)
 }
 
 //点击直接播放音乐
-const songsMusic =(id:number)=>{
+const songsMusic = (id: number) => {
     playMusic(id)
     showSearchView.value = false;
 }
@@ -103,6 +104,7 @@ const routerPush = (name: string, id: number) => {
         showSearchView.value = false;
     })
 }
+
 
 //获取 热门数据接口
 onMounted(async () => {
