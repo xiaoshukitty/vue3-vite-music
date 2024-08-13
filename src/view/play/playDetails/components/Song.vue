@@ -11,7 +11,7 @@
     </el-row>
     <div class="song_list">
         <el-row class="h50 song_info" v-for="(item, index) in songList" :key="index" @dblclick="playMusic(item.id)"
-            :class="{ 'playing': id === item.id }">
+            :class="{ 'playing': id === item.id }" onselectstart="return false;">
             <el-col class="music_song lh50" :span="14">
                 <div class="df">
                     <div class="music_mv">

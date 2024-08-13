@@ -2,21 +2,31 @@
     <div class="login_img"></div>
     <div class="login_size" @click="openLogin">点击登录</div>
     <el-dialog v-model="dialogVisible" title="" width="430" :before-close="handleClose" :append-to-body="true">
-        <div class="title">扫码登录</div>
-        <div class="login-img" v-loading="loading">
-            <img :src="qrCodeImg" alt="">
-            <!-- <div class="img-mask">
-                <div class="img-mask-text" v-if="loginStatus === 800">二维码已失效</div>
-           
-                <el-button type="success" v-if="loginStatus === 800">点击刷新</el-button>
-            </div> -->
+        <div class="scan-status" v-if="loginStatus != 802">
+            <div class="title">扫码登录</div>
+            <div class="login-img" v-loading="loading">
+                <img :src="qrCodeImg" alt="">
+                <!-- <div class="img-mask">
+                    <div class="img-mask-text" v-if="loginStatus === 800">二维码已失效</div>
+
+                    <el-button type="success" v-if="loginStatus === 800">点击刷新</el-button>
+                </div> -->
+            </div>
+            <div class="login-text">使用 <span style="color: #34d399">网易云音乐APP</span> 扫码登录</div>
         </div>
-        <div class="login-text">使用 <span style="color: #34d399">网易云音乐APP</span> 扫码登录</div>
+        <!-- 扫码待确认登录 -->
+        <div class="scan-verify" v-else>
+            <el-icon class="scan-icon">
+                <SuccessFilled />
+            </el-icon>
+            <div class="scan-text">扫码成功</div>
+            <div class="scan-text2">请在手机上确认登录</div>
+        </div>
     </el-dialog>
 </template>
 
 <script setup lang='ts'>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, onUnmounted } from 'vue'
 import { useLoginKey, useLoginQR, useGetLoginStatus, useGetUserInfo } from "@/api/login/index";
 
 const dialogVisible = ref<boolean>(false);
@@ -52,6 +62,7 @@ const loopGetLoginStatus = () => {
         if (res.code === 803) {
             clearInterval(timer);
             dialogVisible.value = false;
+            loginStatus.value = '';
             getUserInfo();
             timer = undefined;
         }
@@ -95,10 +106,6 @@ const getLoginQR = async (loginKey: string) => {
     }
 }
 
-onMounted(() => {
-    getUserInfo()
-})
-
 watch(() => dialogVisible.value, (newVal) => {
     if (newVal) {
         var timestamp = new Date().getTime();
@@ -107,7 +114,9 @@ watch(() => dialogVisible.value, (newVal) => {
         clearInterval(timer);
     }
 })
-
+onUnmounted(() => {
+    clearInterval(timer);
+});
 </script>
 <style scoped lang="scss">
 .login_img {
@@ -124,35 +133,68 @@ watch(() => dialogVisible.value, (newVal) => {
     font-size: 14px;
 }
 
-.title {
-    font-size: 30px;
-    text-align: center;
-    margin-top: 20px;
-}
+.scan-status {
+    width: 390px;
+    height: 310px;
 
-.login-img {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin-left: 50%;
-    margin: 30px auto;
+    .title {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 20px;
+    }
 
-    .img-mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+    .login-img {
+        position: relative;
         width: 200px;
         height: 200px;
+        margin-left: 50%;
+        margin: 30px auto;
 
-        .img-mask-text {
-            color: #fff;
-            font-size: 20px;
+        .img-mask {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 200px;
+            height: 200px;
+
+            .img-mask-text {
+                color: #fff;
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
+    }
+}
+
+
+
+.scan-verify {
+    width: 390px;
+    height: 310px;
+
+    .scan-icon {
+        color: #34d399;
+        font-size: 60px;
+        margin-left: 50%;
+        margin-top: 20px;
+        transform: translateX(-50%);
+    }
+
+    .scan-text {
+        font-size: 30px;
+        font-weight: 600;
+        margin: 40px 10px 20px;
+        text-align: center;
+    }
+
+    .scan-text2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: center;
     }
 }
 

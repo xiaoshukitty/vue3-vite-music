@@ -8,7 +8,7 @@
         </el-row>
         <div class="song_list">
             <el-row class="h50 song_info" v-for="(item, index) in songsList.slice(0, pageSize * page)" :key="index"
-                @dblclick="playMusic(item.id)" :class="{ 'playing': id === item.id }">
+                @dblclick="playMusic(item.id)" :class="{ 'playing': id === item.id }" onselectstart="return false;">
                 <el-col class="music_song lh50" :span="12">
                     <div class="df">
                         <div class="music_mv">
@@ -47,7 +47,7 @@ const props = defineProps<{
     songsList: Song[],
 }>()
 
-const pageSize = ref(10)
+const pageSize = ref(20)
 const page = ref(1)
 
 

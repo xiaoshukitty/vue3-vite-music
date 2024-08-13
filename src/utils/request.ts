@@ -1,20 +1,19 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-axios.defaults.baseURL =  "http://localhost:3000"//基础路径会携带 /api
-axios.defaults.timeout = 5000, //设置超时时间
-
-axios.interceptors.request.use(
-  (config: AxiosRequestConfig | any) => {
-    config.params = {
-      ...config.params,
-      t: Date.now(),
-    };
-    return config;
-  },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
+axios.defaults.baseURL = "http://localhost:3000"; //基础路径会携带 /api
+(axios.defaults.timeout = 5000), //设置超时时间
+  axios.interceptors.request.use(
+    (config: AxiosRequestConfig | any) => {
+      // config.params = {
+      //   ...config.params,
+      //   // t: Date.now(),
+      // };
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
 // 添加响应拦截器
 axios.interceptors.response.use(
@@ -25,7 +24,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 
 interface Http {
   get<T>(url: string, params?: unknown): Promise<T>;
@@ -47,6 +45,8 @@ const http: Http = {
       axios
         .get(url, { params })
         .then((res) => {
+          console.log("res----", res);
+
           resolve(res.data);
         })
         .catch((err) => {

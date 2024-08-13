@@ -181,3 +181,10 @@ export async function usePlayListTrackAll(id: number) {
   });
   return songs;
 }
+
+// 歌单评论
+export async function usePlayReiewListAll(params: any) {
+  return await request.get<{ code: number; data: any }>("comment/playlist", {
+    ...params,
+  });
+}

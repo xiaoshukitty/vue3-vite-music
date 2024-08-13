@@ -47,3 +47,8 @@ export async function useGetLoginStatus(params: LoginQrUrlParamsStatusType) {
 export async function useGetUserInfo() {
   return await request.get("/user/account");
 }
+
+//登录状态获取
+export async function useLoginStatus() {
+  return await request.get(`/login/status?&timestamp=${new Date().getTime()}`);
+}
