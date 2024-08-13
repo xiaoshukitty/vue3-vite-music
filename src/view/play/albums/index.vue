@@ -1,42 +1,44 @@
 <template>
-    <div v-if="albumData">
-        <SongInfoHead :albumData="albumData"></SongInfoHead>
-    </div>
-    <el-tabs v-model="activeName" class="demo-tabs" v-if="albumData">
-        <el-tab-pane :label="`歌曲 ${num}`" name="song">
-            <el-row class="fs14 mt20">
-                <el-col :span="14">歌曲</el-col>
-                <el-col :span="8">专辑</el-col>
-                <el-col :span="2">时长</el-col>
-            </el-row>
-            <div class="song_list">
-                <el-row class="h50 song_info" v-for="(item, index) in songsList" :key="index"
-                    @dblclick="playMusic(item.id)" :class="{ 'playing': id === item.id }">
-                    <el-col class="music_song lh50" :span="14">
-                        <div class="df">
-                            <div class="music_mv">
-                                <div>{{ item.name }}</div>
-                                <div style="display: flex; margin-left:5px;">
-                                    <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv(item.id)">
-                                        <VideoCamera />
+    <div style="padding: 20px">
+        <div v-if="albumData">
+            <SongInfoHead :albumData="albumData"></SongInfoHead>
+        </div>
+        <el-tabs v-model="activeName" class="demo-tabs" v-if="albumData">
+            <el-tab-pane :label="`歌曲 ${num}`" name="song">
+                <el-row class="fs14 mt20">
+                    <el-col :span="14">歌曲</el-col>
+                    <el-col :span="8">专辑</el-col>
+                    <el-col :span="2">时长</el-col>
+                </el-row>
+                <div class="song_list">
+                    <el-row class="h50 song_info" v-for="(item, index) in songsList" :key="index"
+                        @dblclick="playMusic(item.id)" :class="{ 'playing': id === item.id }">
+                        <el-col class="music_song lh50" :span="14">
+                            <div class="df">
+                                <div class="music_mv">
+                                    <div>{{ item.name }}</div>
+                                    <div style="display: flex; margin-left:5px;">
+                                        <el-icon class="mv_hover" :size="20" color="#000" @click.stop="playMv(item.id)">
+                                            <VideoCamera />
+                                        </el-icon>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <el-icon class="icon" :size="20" color="#fff" @click.stop="playMusic(item.id)">
+                                        <CaretRight />
                                     </el-icon>
                                 </div>
                             </div>
-                            <div style="display: flex; align-items: center;">
-                                <el-icon class="icon" :size="20" color="#fff" @click.stop="playMusic(item.id)">
-                                    <CaretRight />
-                                </el-icon>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col class="collection lh50" :span="8">{{ item.al.name }}</el-col>
-                    <el-col class="duration lh50" :span="2">{{ convertToHMS(item.dt / 1000) }}</el-col>
-                </el-row>
-            </div>
-        </el-tab-pane>
-        <el-tab-pane label="评论" name="review">review</el-tab-pane>
-        <el-tab-pane label="专辑详情" name="albumDetails">albumDetails</el-tab-pane>
-    </el-tabs>
+                        </el-col>
+                        <el-col class="collection lh50" :span="8">{{ item.al.name }}</el-col>
+                        <el-col class="duration lh50" :span="2">{{ convertToHMS(item.dt / 1000) }}</el-col>
+                    </el-row>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="评论" name="review">review</el-tab-pane>
+            <el-tab-pane label="专辑详情" name="albumDetails">albumDetails</el-tab-pane>
+        </el-tabs>
+    </div>
 </template>
 
 <script setup lang='ts'>
@@ -96,6 +98,7 @@ const playMv = (id: number) => {
 }
 
 .song_list {
+
     .song_info {
         font-size: 14px;
         cursor: pointer;

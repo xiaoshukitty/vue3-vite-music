@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isFlag">
+    <div style="padding: 20px;" v-if="isFlag">
         <div v-if="playlist">
             <playListHead :playlist="playlist"></playListHead>
         </div>

@@ -46,6 +46,7 @@ watch(
 </script>
 <style lang="scss" scoped>
 .music {
+    padding: 20px;
     h1 {
         font-weight: 700;
         font-size: 40px;

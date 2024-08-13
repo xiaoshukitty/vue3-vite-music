@@ -63,7 +63,7 @@ export const constantRouter = [
     component: () => import("@/layout/index.vue"),
     name: "radioSation",
     meta: {
-      title: "电台",
+      title: "歌单",
       hidden: false,
       icon: "",
     },
@@ -73,7 +73,7 @@ export const constantRouter = [
         path: "/radioSation",
         component: () => import("@/view/radioSation/index.vue"),
         meta: {
-          title: "电台",
+          title: "歌单",
           hidden: false,
           icon: "HomeFilled",
         },

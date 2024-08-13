@@ -102,7 +102,7 @@ export default {
         height: calc(100vh - $base-tabbar-height);
         left: $base-menu-width;
         top: $base-tabbar-height;
-        padding: 20px;
+        // padding: 20px;
         overflow: auto;
         transition: all .3s;
 

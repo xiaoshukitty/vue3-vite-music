@@ -16,6 +16,8 @@ import Mv from './components/Mv/index.vue'
 </script>
 <style lang="scss" scoped>
 .discover {
+    padding: 20px;
+
     h1 {
         font-weight: 700;
         font-size: 40px;

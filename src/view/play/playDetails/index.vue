@@ -1,35 +1,37 @@
 <template>
-    <div class="details_top" v-if="isFlag">
-        <img :src="detailsData?.artist.cover" alt="">
-        <div class="details_right">
-            <div class="details_name">{{ detailsData?.artist.name }}</div>
-            <div class="details_info fs12">{{ detailsData?.artist.briefDesc.substring(0, 90) }}...</div>
-            <div class="details_song fs12">
-                <span>单曲数：{{ detailsData?.artist.musicSize }}</span>
-                <span style="margin: 0 15px;">专辑数：{{ detailsData?.artist.albumSize }}</span>
-                <span>MV数：{{ detailsData?.artist.mvSize }}</span>
-            </div>
-            <div class="details_btn">
-                <el-button type="success" :icon="Plus" round>关注</el-button>
-                <el-button :icon="CirclePlus" round>歌手电台</el-button>
-                <el-button :icon="MoreFilled" circle />
+    <div style="padding: 20px"> 
+        <div class="details_top" v-if="isFlag">
+            <img :src="detailsData?.artist.cover" alt="">
+            <div class="details_right">
+                <div class="details_name">{{ detailsData?.artist.name }}</div>
+                <div class="details_info fs12">{{ detailsData?.artist.briefDesc.substring(0, 90) }}...</div>
+                <div class="details_song fs12">
+                    <span>单曲数：{{ detailsData?.artist.musicSize }}</span>
+                    <span style="margin: 0 15px;">专辑数：{{ detailsData?.artist.albumSize }}</span>
+                    <span>MV数：{{ detailsData?.artist.mvSize }}</span>
+                </div>
+                <div class="details_btn">
+                    <el-button type="success" :icon="Plus" round>关注</el-button>
+                    <el-button :icon="CirclePlus" round>歌手电台</el-button>
+                    <el-button :icon="MoreFilled" circle />
+                </div>
             </div>
         </div>
+        <el-tabs v-model="activeName" class="demo-tabs" v-if="isFlag">
+            <el-tab-pane :label="`歌曲 ${detailsData?.artist.musicSize}`" name="song">
+                <Song :id="id" :typeSelect="typeSelect"></Song>
+            </el-tab-pane>
+            <el-tab-pane :label="`专辑 ${detailsData?.artist.albumSize}`" name="collection">
+                <Album :id="id"></Album>
+            </el-tab-pane>
+            <el-tab-pane :label="`视频 ${detailsData?.artist.musicSize}`" name="M">
+                <PersonageMV :id="id"></PersonageMV>
+            </el-tab-pane>
+            <el-tab-pane label="详情" name="songDetails">
+                <Introduce :id="id"></Introduce>
+            </el-tab-pane>
+        </el-tabs>
     </div>
-    <el-tabs v-model="activeName" class="demo-tabs" v-if="isFlag">
-        <el-tab-pane :label="`歌曲 ${detailsData?.artist.musicSize}`" name="song">
-            <Song :id="id" :typeSelect="typeSelect"></Song>
-        </el-tab-pane>
-        <el-tab-pane :label="`专辑 ${detailsData?.artist.albumSize}`" name="collection">
-            <Album :id="id"></Album>
-        </el-tab-pane>
-        <el-tab-pane :label="`视频 ${detailsData?.artist.musicSize}`" name="M">
-            <PersonageMV :id="id"></PersonageMV>
-        </el-tab-pane>
-        <el-tab-pane label="详情" name="songDetails">
-            <Introduce :id="id"></Introduce>
-        </el-tab-pane>
-    </el-tabs>
 </template>
 
 <script setup lang='ts'>
