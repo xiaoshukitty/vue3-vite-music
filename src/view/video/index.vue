@@ -1,26 +1,28 @@
 <template>
-    <el-popover placement="bottom-end" :width="1000" trigger="hover" v-model:visible="showVideo">
-        <template #reference>
-            <el-button plain round>
-                <span>全部视频</span>
-                <el-icon>
-                    <ArrowRight />
-                </el-icon>
-            </el-button>
-        </template>
-        <el-scrollbar height="440px" style="padding: 20px;">
-            <div class="mv_container">
-                <div class="mv_title mv_hover" @click="selectVideo(0)">全部视频</div>
-                <div class="mv_list">
-                    <div class="mv_item" v-for="item in mvVideoList" :key="item.id">
-                        <span class="mv_span mv_hover" @click="selectVideo(item.id)">{{ item.name }}</span>
+    <div style="padding: 20px;">
+        <el-popover placement="bottom-end" :width="1000" trigger="hover" v-model:visible="showVideo">
+            <template #reference>
+                <el-button plain round>
+                    <span>全部视频</span>
+                    <el-icon>
+                        <ArrowRight />
+                    </el-icon>
+                </el-button>
+            </template>
+            <el-scrollbar height="440px" style="padding: 20px;">
+                <div class="mv_container">
+                    <div class="mv_title mv_hover" @click="selectVideo(0)">全部视频</div>
+                    <div class="mv_list">
+                        <div class="mv_item" v-for="item in mvVideoList" :key="item.id">
+                            <span class="mv_span mv_hover" @click="selectVideo(item.id)">{{ item.name }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </el-scrollbar>
-    </el-popover>
+            </el-scrollbar>
+        </el-popover>
 
-    <MvVideo :mvVideoData="mvVideoData"></MvVideo>
+        <MvVideo :mvVideoData="mvVideoData"></MvVideo>
+    </div>
 </template>
 
 <script setup lang='ts'>
@@ -49,7 +51,7 @@ const selectVideo = (id: number) => {
 };
 const getMvVideoData = async () => {
     console.log(pageInfo.id, pageInfo.page - 1);
-    
+
     mvVideoData.value = await useVideoGroup(pageInfo.id, pageInfo.page - 1);
 }
 
