@@ -19,7 +19,7 @@ export const constantRouter = [
     meta: {
       title: "推荐",
       hidden: false,
-      icon: "",
+      icon: "Operation",
     },
     redirect: "/discover",
     children: [
@@ -29,7 +29,7 @@ export const constantRouter = [
         meta: {
           title: "推荐",
           hidden: false,
-          icon: "HomeFilled",
+          icon: "Operation",
         },
       },
     ],
@@ -42,7 +42,7 @@ export const constantRouter = [
     meta: {
       title: "音乐馆",
       hidden: false,
-      icon: "",
+      icon: "Headset",
     },
     redirect: "/music",
     children: [
@@ -52,7 +52,7 @@ export const constantRouter = [
         meta: {
           title: "音乐馆",
           hidden: false,
-          icon: "HomeFilled",
+          icon: "Headset",
         },
       },
     ],
@@ -65,7 +65,7 @@ export const constantRouter = [
     meta: {
       title: "歌单",
       hidden: false,
-      icon: "",
+      icon: "Memo",
     },
     redirect: "/radioSation",
     children: [
@@ -75,7 +75,7 @@ export const constantRouter = [
         meta: {
           title: "歌单",
           hidden: false,
-          icon: "HomeFilled",
+          icon: "Memo",
         },
       },
     ],
@@ -89,7 +89,7 @@ export const constantRouter = [
     meta: {
       title: "视频",
       hidden: false,
-      icon: "",
+      icon: "VideoCamera",
     },
     redirect: "/video",
     children: [
@@ -99,7 +99,7 @@ export const constantRouter = [
         meta: {
           title: "视频",
           hidden: false,
-          icon: "HomeFilled",
+          icon: "VideoCamera",
         },
       },
     ],

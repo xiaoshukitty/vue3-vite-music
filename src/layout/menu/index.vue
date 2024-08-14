@@ -1,11 +1,16 @@
 <template>
     <template v-for="(item) in menuList" :key="item.path">
         <div v-if="!item.meta.hidden" @click="goRoute(item)" class="menu_list">
-            <div :class="item.redirect == $route.path ? 'menu_item menu_select' : 'menu_item'">{{ item.meta.title }}</div>
+            <div :class="item.redirect == $route.path ? 'menu_item menu_select' : 'menu_item'">
+                <el-icon>
+                    <component :is="item.meta.icon"></component>
+                </el-icon>
+                <span style="margin-left: 7px;">{{ item.meta.title }}</span>
+            </div>
         </div>
     </template>
 </template>
-  
+
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router';
 //获取父组件传递过来的全部路由数组
@@ -36,7 +41,7 @@ export default {
     name: 'Menu',//递归组件加的name(必须要加)
 }
 </script>
-  
+
 <style scoped lang="scss">
 .menu_list {
     height: 40px;
@@ -53,6 +58,8 @@ export default {
     border-radius: 5px;
     --tw-text-opacity: 1;
     color: rgb(51 65 85 / var(--tw-text-opacity));
+    display: flex;
+    align-items: center;
 }
 
 .menu_select {
