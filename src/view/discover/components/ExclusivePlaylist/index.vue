@@ -1,9 +1,9 @@
 <template>
     <div class="exclusive_playlist">
-        <Title :title="'专属歌单'"/>
+        <Title :title="'专属歌单'" />
         <div class="block">
             <div class="block_list" v-for="(item, index) in exclusivePlaylistData" :key="index">
-                <div class="block_item">
+                <div class="block_item" @click="goToPlayList(item)">
                     <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
                 </div>
                 <div class="text">{{ item.name }}</div>
@@ -16,11 +16,23 @@
 import Title from '@/components/common/Title/index.vue'
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { onMounted, toRefs } from 'vue'
-import { useMusicStore } from '@/store/modules/music'
+import { useMusicStore } from '@/store/modules/music';
+import { useRouter } from "vue-router";
 
 const { exclusivePlaylistData } = toRefs(useMusicStore())
 const { getExclusivePlaylistData } = useMusicStore()
+const router = useRouter();//倒入路由模块
 
+//跳转歌单页面
+const goToPlayList = (item: object) => {
+    console.log(item);
+    router.push({
+        path: '/playList',
+        query: {
+            id: item.id
+        }
+    })
+}
 
 onMounted(async () => {
     await getExclusivePlaylistData();
