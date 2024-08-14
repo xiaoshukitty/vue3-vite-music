@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="song-center">
-            <el-scrollbar>
+            <el-scrollbar :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
                 <div class="scrollbar-flex-content">
                     <p v-for="(item, index) in tagList" :key="item"
                         :class="['scrollbar-demo-item', avatarIndex == index ? 'active' : '']"
@@ -41,16 +41,19 @@
 <script setup lang='ts'>
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { getTopPlayList, getTopPlayListTags } from '@/api/radioSation'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from "vue-router";
+import { useThemeStore } from '@/store/modules/theme'
+
 let songType = ref<string>('全部');
 let songList = ref<any>([]);
 const zeroObj = ref<object>({})
 const tagList = ref<any>([]);
 let avatarIndex = ref<number>(0);
 let loading = ref<boolean>(false);
-//倒入路由模块
-const router = useRouter()
+const router = useRouter();//倒入路由模块
+const musicThemeStore = useThemeStore();
+const isBg = ref<boolean>();
 
 const getPayList = async () => {
     loading.value = true;
@@ -87,10 +90,20 @@ const goToPlayList = (item: object) => {
     })
 }
 
+watch(
+    () => musicThemeStore.getTheme,
+    (newVal: any) => {
+        newVal == 'dark' ? isBg.value = false : isBg.value = true;
+    }
+);
+
+
 onMounted(async () => {
     loading.value = true;
+    musicThemeStore.theme == 'dark' ? isBg.value = false : isBg.value = true;
     await getPayList();
     await getPlayListTags();
+
 })
 </script>
 <style lang="scss" scoped>
@@ -204,6 +217,14 @@ onMounted(async () => {
 
     .active {
         color: #34d399
+    }
+
+    .tabs_bg {
+        background-color: $base-dark !important;
+    }
+
+    .tabs_bg1 {
+        background-color: #fff;
     }
 
 }
