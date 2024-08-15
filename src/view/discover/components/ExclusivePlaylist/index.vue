@@ -1,14 +1,35 @@
 <template>
     <div class="exclusive_playlist">
-        <Title :title="'专属歌单'" />
-        <div class="block">
-            <div class="block_list" v-for="(item, index) in exclusivePlaylistData" :key="index">
-                <div class="block_item" @click="goToPlayList(item)">
-                    <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
-                </div>
-                <div class="text">{{ item.name }}</div>
-            </div>
-        </div>
+        <el-space style="width: 100%" fill>
+            <el-skeleton class="skelton" animated :count="1" :loading="skeletonLoading">
+                <template #template>
+                    <el-skeleton-item variant="h3" class="skelton-title" />
+                </template>
+                <template #default>
+                    <Title :title="'专属歌单'" />
+                </template>
+            </el-skeleton>
+            <el-skeleton class="skelton" animated :count="10" :loading="skeletonLoading">
+                <template #template>
+                    <div class="skelton-list">
+                        <el-skeleton-item variant="image" style="height: 300px" />
+                        <div style="margin-top: 10px;">
+                            <el-skeleton-item variant="h3" style="width: 70%;" />
+                        </div>
+                    </div>
+                </template>
+                <template #default>
+                    <div class="block">
+                        <div class="block_list" v-for="(item, index) in exclusivePlaylistData" :key="index">
+                            <div class="block_item" @click="goToPlayList(item)">
+                                <PlaylistModule :imgSrc="item.picUrl"></PlaylistModule>
+                            </div>
+                            <div class="text">{{ item.name }}</div>
+                        </div>
+                    </div>
+                </template>
+            </el-skeleton>
+        </el-space>
     </div>
 </template>
 
@@ -19,7 +40,7 @@ import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music';
 import { useRouter } from "vue-router";
 
-const { exclusivePlaylistData } = toRefs(useMusicStore())
+const { exclusivePlaylistData, skeletonLoading } = toRefs(useMusicStore())
 const { getExclusivePlaylistData } = useMusicStore()
 const router = useRouter();//倒入路由模块
 
@@ -49,13 +70,11 @@ onMounted(async () => {
 
     .block {
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0px, 1fr));
+        gap: 8px 12px;
 
         .block_list {
-            width: 19%;
-            // height: calc((100vw - $base-menu-width - 40px)/5);
-            margin-right: 1.25%;
 
             .block_item {
                 width: 100%;
@@ -78,6 +97,21 @@ onMounted(async () => {
             margin-right: 0 !important;
         }
 
+    }
+
+    .skelton {
+        display: grid;
+        gap: 8px 12px;
+        width: 100%;
+        grid-template-columns: repeat(5, minmax(0px, 1fr));
+        border-radius: 10px;
+
+    }
+
+    .skelton-title {
+        width: 50%;
+        height: 24px;
+        margin: 20px 0;
     }
 }
 </style>

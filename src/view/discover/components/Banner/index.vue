@@ -1,10 +1,24 @@
 <template>
     <div class="swiper">
-        <el-carousel :interval="2000" type="card" height="250px" trigger="click" :pause-on-hover="false" :autoplay="false">
-            <el-carousel-item v-for="item in banners" :key="item.bannerId">
-                <img class="swiper_img" :src="item.pic" alt="" @click="playBack(item)">
-            </el-carousel-item>
-        </el-carousel>
+        <el-space style="width: 100%" fill>
+            <el-skeleton class="skelton" animated :count="1" :loading="skeletonLoading">
+                <template #template>
+                    <div class="skelton-carousel">
+                        <el-skeleton-item variant="h3" class="skelton-title1" />
+                        <el-skeleton-item variant="h3" class="skelton-title2" />
+                        <el-skeleton-item variant="h3" class="skelton-title3" />
+                    </div>
+                </template>
+                <template #default>
+                    <el-carousel :interval="2000" type="card" height="250px" trigger="click" :pause-on-hover="false"
+                        :autoplay="false">
+                        <el-carousel-item v-for="item in banners" :key="item.bannerId">
+                            <img class="swiper_img" :src="item.pic" alt="" @click="playBack(item)">
+                        </el-carousel-item>
+                    </el-carousel>
+                </template>
+            </el-skeleton>
+        </el-space>
     </div>
 </template>
 
@@ -14,13 +28,13 @@ import { useBannerStore } from '@/store/modules/banner'
 import { Banner } from "@/api/types/recommended";
 
 const { getBanners } = useBannerStore()
-const { banners } = toRefs(useBannerStore())
+const { banners, skeletonLoading } = toRefs(useBannerStore())
 
 
 onMounted(async () => {
     await getBanners()
     // console.log('banners---',banners);
-    
+
 })
 
 const playBack = (item: Banner) => {
@@ -59,8 +73,30 @@ const playBack = (item: Banner) => {
         transition-duration: .15s;
     }
 
-    ::v-deep .el-carousel__item{
+    ::v-deep .el-carousel__item {
         border-radius: 10px !important;
+    }
+
+
+    .skelton-carousel {
+        padding-top: 24px;
+        display: flex;
+        height: 100%;
+        position: relative;
+
+        .skelton-title2 {
+            position: absolute;
+            top: 0;
+            left: 405px;
+            width: 800px;
+            height: 250px;
+        }
+
+        .skelton-title1,
+        .skelton-title3 {
+            width: 100%;
+            height: 200px;
+        }
     }
 
 }

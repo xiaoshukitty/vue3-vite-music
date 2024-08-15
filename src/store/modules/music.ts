@@ -26,11 +26,15 @@ import {
 export const useMusicStore = defineStore("useMusicStore", () => {
   // 专属音乐
   const exclusivePlaylistData = ref<ExclusivePlaylist[]>([]);
+  let skeletonLoading = ref(true);
   const getExclusivePlaylistData = async () => {
     if (exclusivePlaylistData.value.length) return;
     let listData = await useExclusivePlaylist();
 
     exclusivePlaylistData.value = randomList(listData, 10);
+    setTimeout(() => {
+      skeletonLoading.value = false;
+    }, 1000);
   };
 
   //推荐新音乐
@@ -38,6 +42,9 @@ export const useMusicStore = defineStore("useMusicStore", () => {
   const getRecommendedMusicData = async () => {
     if (recommendedMusicData.value.length) return;
     recommendedMusicData.value = await useRecommendedMusic();
+    setTimeout(() => {
+      skeletonLoading.value = false;
+    }, 1000);
   };
 
   //推荐MV
@@ -45,6 +52,9 @@ export const useMusicStore = defineStore("useMusicStore", () => {
   const getRecommendedMvData = async () => {
     if (recommendedMvData.value.length) return;
     recommendedMvData.value = await useRecommendedMv();
+    setTimeout(() => {
+      skeletonLoading.value = false;
+    }, 1000);
   };
 
   /**音乐馆 */
@@ -71,6 +81,7 @@ export const useMusicStore = defineStore("useMusicStore", () => {
 
   return {
     exclusivePlaylistData,
+    skeletonLoading,
     getExclusivePlaylistData,
 
     recommendedMusicData,
