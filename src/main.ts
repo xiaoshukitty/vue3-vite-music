@@ -34,3 +34,19 @@ app.component("SvgIcon", SvgIcon);
 
 //将应用挂载到挂载点上
 app.mount("#app");
+
+// 动态创建 html 结果来展示页面加载 loading （要写在 app 挂在完毕后）
+const appContainer = document.querySelector('#app');
+const loadingMask = document.createElement('div');
+loadingMask.id = 'loading-mask';
+loadingMask.innerHTML = `
+  <div class="loading-wrapper">
+    <span class="loading-dot loading-dot-spin">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
+  </div>
+`
+appContainer.appendChild(loadingMask);
