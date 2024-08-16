@@ -10,6 +10,7 @@ let useUserStore = defineStore("User", {
     // : UserState 函数返回类型的意思
     return {
       menuRoutes: constantRouter, //仓库存储生成菜单需要数组(路由)
+      skeletonLoading: false, //骨架屏
     };
   },
   //处理异步｜逻辑地方

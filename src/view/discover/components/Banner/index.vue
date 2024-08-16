@@ -26,9 +26,11 @@
 import { onMounted, toRefs } from "vue";
 import { useBannerStore } from '@/store/modules/banner'
 import { Banner } from "@/api/types/recommended";
+import useUserStore from '@/store/modules/user'
 
 const { getBanners } = useBannerStore()
-const { banners, skeletonLoading } = toRefs(useBannerStore())
+const { banners } = toRefs(useBannerStore());
+const { skeletonLoading } = toRefs(useUserStore())
 
 
 onMounted(async () => {

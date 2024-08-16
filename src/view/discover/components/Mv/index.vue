@@ -41,10 +41,12 @@ import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music'
 import { useRouter } from "vue-router";
+import useUserStore from '@/store/modules/user'
 
 const router = useRouter()
-const { recommendedMvData ,skeletonLoading} = toRefs(useMusicStore())
-const { getRecommendedMvData } = useMusicStore()
+const { recommendedMvData } = toRefs(useMusicStore());
+const { getRecommendedMvData } = useMusicStore();
+const { skeletonLoading } = toRefs(useUserStore());
 
 const goToBack = (name: string, id: number) => {
     router.push({ path: name, query: { id: id } })

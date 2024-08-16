@@ -2,4 +2,5 @@ import type { RouteRecordRaw } from "vue-router"; //vue-router 自带的路由�
 // 定义小仓库数据 state 类型
 export interface UserState {
   menuRoutes: RouteRecordRaw[];
+  skeletonLoading: boolean;
 }

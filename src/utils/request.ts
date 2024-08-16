@@ -1,4 +1,7 @@
 import axios, { type AxiosRequestConfig } from "axios";
+//获取用户相关的小仓库路由
+import useStore from "@/store";
+let requestCount: number = 0; // 统计发起请求的接口数量
 
 axios.defaults.baseURL = "http://localhost:3000"; //基础路径会携带 /api
 (axios.defaults.timeout = 5000), //设置超时时间
@@ -8,6 +11,10 @@ axios.defaults.baseURL = "http://localhost:3000"; //基础路径会携带 /api
       //   ...config.params,
       //   // t: Date.now(),
       // };
+      requestCount++; // 统计发送的请求数
+      console.log('requestCount---',requestCount);
+      
+      useStore.state.value.User.skeletonLoading = true; // 加载Loading
       return config;
     },
     function (error) {
@@ -18,6 +25,13 @@ axios.defaults.baseURL = "http://localhost:3000"; //基础路径会携带 /api
 // 添加响应拦截器
 axios.interceptors.response.use(
   (response) => {
+    requestCount--; // 每响应一个请求,减少一个count
+    console.log('requestCount---2222',requestCount);
+    if (requestCount <= 0) {
+      useStore.state.value.User.skeletonLoading = false; // 清空loadingCount后注销Loading
+    } else {
+      useStore.state.value.User.skeletonLoading = true;
+    }
     return response;
   },
   function (error) {

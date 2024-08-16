@@ -38,10 +38,13 @@ import Title from '@/components/common/Title/index.vue'
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music';
+import useUserStore from '@/store/modules/user'
 import { useRouter } from "vue-router";
 
-const { exclusivePlaylistData, skeletonLoading } = toRefs(useMusicStore())
+const { exclusivePlaylistData } = toRefs(useMusicStore());
+const { skeletonLoading } = toRefs(useUserStore());
 const { getExclusivePlaylistData } = useMusicStore()
+
 const router = useRouter();//倒入路由模块
 
 //跳转歌单页面

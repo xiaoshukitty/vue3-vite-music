@@ -44,10 +44,12 @@ import { toRefs, onMounted } from 'vue'
 import Title from '@/components/common/Title/index.vue'
 import { useMusicStore } from '@/store/modules/music'
 import { usePlaySong } from '@/store/modules/playSong'
+import useUserStore from '@/store/modules/user'
 
-const { recommendedMusicData, skeletonLoading } = toRefs(useMusicStore())
-const { getRecommendedMusicData } = useMusicStore()
-const { playMusic } = usePlaySong()
+const { recommendedMusicData } = toRefs(useMusicStore());
+const { getRecommendedMusicData } = useMusicStore();
+const { playMusic } = usePlaySong();
+const { skeletonLoading } = toRefs(useUserStore());
 
 onMounted(async () => {
     await getRecommendedMusicData();
