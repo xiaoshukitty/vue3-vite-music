@@ -38,7 +38,7 @@ import Title from '@/components/common/Title/index.vue'
 import PlaylistModule from '@/components/common/PlaylistModule/index.vue'
 import { onMounted, toRefs } from 'vue'
 import { useMusicStore } from '@/store/modules/music';
-import useUserStore from '@/store/modules/user'
+import useUserStore from '@/store/modules/user';
 import { useRouter } from "vue-router";
 
 const { exclusivePlaylistData } = toRefs(useMusicStore());
