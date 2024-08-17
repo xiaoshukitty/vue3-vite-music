@@ -2,12 +2,23 @@
     <div style="padding: 20px;">
         <el-popover placement="bottom-end" :width="1000" trigger="hover" v-model:visible="showVideo">
             <template #reference>
-                <el-button plain round>
-                    <span>全部视频</span>
-                    <el-icon>
-                        <ArrowRight />
-                    </el-icon>
-                </el-button>
+                <el-space style="" fill>
+                    <el-skeleton class="skelton" animated :count="1" :loading="skeletonLoading">
+                        <template #template>
+                            <el-skeleton-item variant="h3" class="skelton-title" />
+                        </template>
+                        <template #default>
+                            <el-button plain round>
+                                <div > 
+                                    <span >全部视频</span>
+                                    <el-icon>
+                                        <ArrowRight />
+                                    </el-icon>
+                                </div>
+                            </el-button>
+                        </template>
+                    </el-skeleton>
+                </el-space>
             </template>
             <el-scrollbar height="440px" style="padding: 20px;">
                 <div class="mv_container">
@@ -21,7 +32,7 @@
             </el-scrollbar>
         </el-popover>
 
-        <MvVideo :mvVideoData="mvVideoData"></MvVideo>
+        <MvVideo :mvVideoData="mvVideoData" :skeletonLoading="skeletonLoading"></MvVideo>
     </div>
 </template>
 
@@ -31,15 +42,18 @@ import MvVideo from './components/ MvVideo.vue'
 import { useMvVideoStore } from '@/store/modules/mvVideo'
 import type { Video } from "@/api/types/mvApi";
 import { useVideoGroup } from "@/api/mvApi/index";
+import useUserStore from '@/store/modules/user';
 
-const { getMvVideoList } = useMvVideoStore()
-const { mvVideoList } = toRefs(useMvVideoStore())
+const { getMvVideoList } = useMvVideoStore();
+const { mvVideoList } = toRefs(useMvVideoStore());
+const { skeletonLoading } = toRefs(useUserStore());
 const mvVideoData = ref<Video[]>([]);
-const showVideo = ref<boolean>(false)
+const showVideo = ref<boolean>(false);
 const pageInfo = reactive({
     page: 1,
     id: 0,
 });
+
 
 const selectVideo = (id: number) => {
     pageInfo.id = id;
@@ -90,6 +104,12 @@ onMounted(() => {
 }
 
 ::v-deep .el-scrollbar {
+    padding: 20px;
+}
+
+.skelton-title {
+    width: 120px;
+    height: 32px;
     padding: 20px;
 }
 </style>
