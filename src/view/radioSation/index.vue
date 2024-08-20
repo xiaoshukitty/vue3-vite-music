@@ -37,15 +37,18 @@
                 </template>
                 <template #default>
                     <div class="song-center">
-                        <el-scrollbar :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
-                            <div class="scrollbar-flex-content">
-                                <p v-for="(item, index) in tagList" :key="item"
-                                    :class="['scrollbar-demo-item', avatarIndex == index ? 'active' : '']"
-                                    @click="binTag(index, item)">
-                                    {{ item.name }}
-                                </p>
-                            </div>
-                        </el-scrollbar>
+                        <el-affix :offset="56">
+                            <el-scrollbar :class="isBg ? 'tabs_bg1' : 'tabs_bg'">
+                                <div class="scrollbar-flex-content">
+                                    <p v-for="(item, index) in tagList" :key="item"
+                                        :class="['scrollbar-demo-item', avatarIndex == index ? 'active' : '']"
+                                        @click="binTag(index, item)">
+                                        {{ item.name }}
+                                    </p>
+                                </div>
+                            </el-scrollbar>
+                        </el-affix>
+
                     </div>
                 </template>
             </el-skeleton>
