@@ -1,5 +1,5 @@
 <template>
-    <div class="radioSation" v-loading="loading">
+    <div class="radioSation">
         <el-space style="width: 100%" fill>
             <el-skeleton class="skelton" animated :loading="skeletonLoading">
                 <template #template>
