@@ -35,6 +35,7 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
+    requestCount--; // 每响应一个请求,减少一个count 就算借口失败也减少，避免借口请求失败还占据一个位置，导致其他接口无法正常显示loading
     return Promise.reject(error);
   }
 );
