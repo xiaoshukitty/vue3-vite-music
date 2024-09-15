@@ -27,7 +27,7 @@ axios.interceptors.response.use(
   (response) => {
     requestCount--; // 每响应一个请求,减少一个count
     console.log('requestCount---2222',requestCount);
-    if (requestCount <= 0) {
+    if (requestCount <= 0) {  /**还有bug没解决，然后一个借口报错，其他借口全部完成这里也是走的 skeletonLoading == true  */
       useStore.state.value.User.skeletonLoading = false; // 清空loadingCount后注销Loading
     } else {
       useStore.state.value.User.skeletonLoading = true;
