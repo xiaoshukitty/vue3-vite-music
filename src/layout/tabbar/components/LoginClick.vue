@@ -27,14 +27,21 @@
 
 <script setup lang='ts'>
 import { onMounted, ref, watch, onUnmounted } from 'vue'
-import { useLoginKey, useLoginQR, useGetLoginStatus, useGetUserInfo } from "@/api/login/index";
+import { useLoginKey, useLoginQR, useGetLoginStatus } from "@/api/login/index";
+import request from "@/utils/request";
 
 const dialogVisible = ref<boolean>(false);
 const loading = ref<boolean>(true);
 const qrCodeImg = ref<string>('');//登录二维码
-let timer: number | undefined;
+let timer: NodeJS.Timeout | undefined;
 let qrCodeKey = ref<string>('');
 let loginStatus = ref<number | string>();
+
+interface UserInfoResponse {
+    code: number;
+    data?: any;
+    [key: string]: any;
+}
 
 const openLogin = () => {
     loading.value = true;
@@ -49,35 +56,68 @@ const handleClose = () => {
 
 //循环获取登录状态
 const loopGetLoginStatus = () => {
+    if (timer) {
+        clearInterval(timer);
+    }
+    
     timer = setInterval(async () => {
+        if (!qrCodeKey.value) {
+            clearInterval(timer);
+            return;
+        }
+
         let params = {
             key: qrCodeKey.value,
             timestamp: new Date().getTime(),
         }
         const res = await useGetLoginStatus(params);
-        loginStatus.value = res.code;
-        console.log('结果', res.code);
-
-        if (timer === undefined) return;
+        
         if (res.code === 803) {
             clearInterval(timer);
             dialogVisible.value = false;
             loginStatus.value = '';
-            getUserInfo();
+            // 获取 cookie 并传递给 getUserInfo
+            const cookie = res.cookie;
+            await getUserInfo(cookie);
             timer = undefined;
+            return;
         }
-        if (res.code == 800) {
+        
+        if (res.code === 800) {
             clearInterval(timer);
-
             timer = undefined;
+            return;
         }
+
+        loginStatus.value = res.code;
     }, 1000)
 }
 
 //获取用户信息
-const getUserInfo = async () => {
-    const res = await useGetUserInfo();
-    console.log('用户信息', res);
+const getUserInfo = async (cookie?: string) => {
+    console.log('cookie', cookie);
+    try {
+        const timestamp = new Date().getTime();
+        const res = await request.get<UserInfoResponse>('/login/status', {
+            timestamp
+        }, {
+            headers: {
+                'Cookie': cookie || ''
+            }
+        });
+        console.log('用户信息响应:', res);
+        if (cookie) {
+            localStorage.setItem('cookie', cookie); //缓存cookie
+        }
+        localStorage.setItem('userInfo', JSON.stringify(res.data.profile)); //缓存用户信息
+        if (!res || res.code !== 200) {
+            console.error('获取用户信息失败，响应数据:', res);
+            return;
+        }
+        // 这里可以添加用户信息处理逻辑
+    } catch (error) {
+        console.error('获取用户信息失败，错误详情:', error);
+    }
 }
 
 const loginKey = async (timestamp: number) => {
@@ -106,12 +146,15 @@ const getLoginQR = async (loginKey: string) => {
     }
 }
 
-watch(() => dialogVisible.value, (newVal) => {
+watch(() => dialogVisible.value, (newVal: boolean) => {
     if (newVal) {
-        var timestamp = new Date().getTime();
-        loginKey(timestamp)
+        const timestamp = new Date().getTime();
+        loginKey(timestamp);
     } else {
-        clearInterval(timer);
+        if (timer) {
+            clearInterval(timer);
+            timer = undefined;
+        }
     }
 })
 onUnmounted(() => {

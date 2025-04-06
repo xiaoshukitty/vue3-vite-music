@@ -201,6 +201,11 @@ onMounted(async () => {
                 color: rgba(255, 255, 255, 0.82);
                 font-size: 0.75rem;
                 line-height: 1rem;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

@@ -5,7 +5,7 @@ import {
   LoginStatusType,
   LoginQrUrlParamsType,
   LoginQrUrlParamsStatusType,
-} from "@/api/login/type";
+} from "@/api/types/login";
 
 //登录
 export async function useLogin(phone: string, password: string) {
@@ -36,11 +36,13 @@ export async function useLoginQR(params: LoginQrUrlParamsType) {
 export async function useGetLoginStatus(params: LoginQrUrlParamsStatusType) {
   return await request.get<{
     code: number;
-    data: LoginStatusType;
+    // data: LoginStatusType;
+    cookie: string;
+  message: string;
   }>("/login/qr/check", {
     key: params.key,
     timestamp: params.timestamp,
-  });
+  }, { showLoading: false });
 }
 
 //登录成功获取个人信息
